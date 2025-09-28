@@ -1,0 +1,6 @@
+{
+  "plugins": {
+    "@unocss/postcss": { "configFile": "uno.config.ts" },
+    "autoprefixer": {}
+  }
+}

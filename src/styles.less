@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+@unocss;
+
+/* CSS Variables para tema light/dark */
+:root {
+  --color-primary: #3b82f6;
+  --color-on-primary: #ffffff;
+  --color-surface: #ffffff;
+  --color-on-surface: #1f2937;
+}
+
+:root.light {
+  --color-primary: #3b82f6;
+  --color-on-primary: #ffffff;
+  --color-surface: #ffffff;
+  --color-on-surface: #1f2937;
+}
+
+:root:not(.light) {
+  --color-primary: #60a5fa;
+  --color-on-primary: #1e293b;
+  --color-surface: #1f2937;
+  --color-on-surface: #f9fafb;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Reduzir animações se solicitado */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
