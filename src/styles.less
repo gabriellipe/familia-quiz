@@ -1,3 +1,5 @@
+@import '@unocss/reset/tailwind.css';
+
 /* CSS Variables para tema light/dark */
 :root {
   --color-primary: #3b82f6;
@@ -32,6 +34,21 @@ body {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
   transition: background-color 0.3s, color 0.3s;
+}
+
+/* Classes de utilidade básicas */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
 }
 
 /* Reduzir animações se solicitado */
