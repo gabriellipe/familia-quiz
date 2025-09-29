@@ -36,17 +36,17 @@ export class QuizService {
   }
   private embaralharPerguntas(perguntas: Pergunta[]): PerguntaEmbaralhada[] {
     // Filtra apenas perguntas válidas com 4 alternativas
-    const perguntasValidas = perguntas.filter(pergunta => 
-      pergunta.alternativas && 
-      pergunta.alternativas.length === 4 && 
+    const perguntasValidas = perguntas.filter(pergunta =>
+      pergunta.alternativas &&
+      pergunta.alternativas.length === 4 &&
       pergunta.alternativas.every(alt => alt.texto && alt.texto.trim().length > 0)
     );
-    
+
     // Se temos menos de 10 perguntas válidas, usa todas disponíveis
     const numPerguntas = Math.min(perguntasValidas.length, 10);
     const perguntasEmbaralhadas = this.shuffleArray([...perguntasValidas]).slice(0, numPerguntas);
-    
-    
+
+
     return perguntasEmbaralhadas.map(pergunta => {
       const respostaCorreta = pergunta.alternativas[0]; // A primeira é sempre a correta
       const alternativasEmbaralhadas = this.shuffleArray([...pergunta.alternativas]);
@@ -148,7 +148,7 @@ export class QuizService {
         if (perguntaIndex >= 0 && perguntaIndex < 10) {
           this.perguntaAtualIndexSource.next(perguntaIndex);
         }
-      } catch (error) {
+      } catch {
         // Se há erro no localStorage, limpa
         localStorage.removeItem(this.STORAGE_KEY);
       }
