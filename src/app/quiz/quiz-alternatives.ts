@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PerguntaEmbaralhada } from '../types/quiz.types';
-import { EstadoResposta } from '../types/quiz.types';
-import { QuizAlternativeButton } from './quiz-alternative-button';
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {PerguntaEmbaralhada} from '../types/quiz.types';
+import {EstadoResposta} from '../types/quiz.types';
+import {QuizAlternativeButton} from './quiz-alternative-button';
 
 @Component({
   selector: 'app-quiz-alternatives',
@@ -40,19 +40,15 @@ export class QuizAlternativesComponent {
   @Input() selectedAlternative: number | undefined = undefined;
   @Input() answerState!: EstadoResposta;
   @Output() selectAlternative = new EventEmitter<number>();
-
   protected get isAnswered(): boolean {
     return this.answerState !== EstadoResposta.NAO_RESPONDIDA;
   }
-
   protected onSelectAlternative(index: number): void {
     this.selectAlternative.emit(index);
   }
-
   protected isSelected(index: number): boolean {
     return index === this.selectedAlternative;
   }
-
   protected getAlternativeClass(index: number): string {
     if (!this.isAnswered) {
       return 'state-neutral';
@@ -61,7 +57,7 @@ export class QuizAlternativesComponent {
     const isSelected = index === this.selectedAlternative;
     const isCorrect = index === this.question.indiceRespostaCorreta;
 
-    let classes = [];
+    const classes = [];
 
     if (isSelected) {
       classes.push('state-selected');

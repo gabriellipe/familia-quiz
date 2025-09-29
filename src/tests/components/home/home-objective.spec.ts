@@ -1,6 +1,6 @@
-import { provideZoneChangeDetection } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeObjectiveComponent } from '../../../app/home/home-objective';
+import {provideZoneChangeDetection} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HomeObjectiveComponent} from '../../../app/home/home-objective';
 
 describe('HomeObjectiveComponent', () => {
   let component: HomeObjectiveComponent;

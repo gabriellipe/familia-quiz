@@ -1,8 +1,8 @@
-import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { QuizService } from './services/quiz.service';
-import { ThemeService } from './services/theme.service';
+import {Component, OnInit, inject, ChangeDetectionStrategy} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {QuizService} from './services/quiz.service';
+import {ThemeService} from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -34,11 +34,9 @@ import { ThemeService } from './services/theme.service';
 export class AppComponent implements OnInit {
   protected readonly quizService = inject(QuizService);
   protected readonly themeService = inject(ThemeService);
-
   ngOnInit(): void {
     this.quizService.carregarPerguntas().subscribe();
   }
-
   protected toggleTheme(): void {
     this.themeService.toggleTheme();
   }

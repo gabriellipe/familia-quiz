@@ -1,6 +1,6 @@
-import { provideZoneChangeDetection } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeHeroComponent } from '../../../app/home/home-hero';
+import {provideZoneChangeDetection} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HomeHeroComponent} from '../../../app/home/home-hero';
 
 describe('HomeHeroComponent', () => {
   let component: HomeHeroComponent;

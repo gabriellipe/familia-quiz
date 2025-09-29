@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { EstadoResposta } from '../types/quiz.types';
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {EstadoResposta} from '../types/quiz.types';
 
 @Component({
   selector: 'app-quiz-feedback',
@@ -42,15 +42,12 @@ export class QuizFeedbackComponent {
   @Input() justification!: string;
   @Input() isLastQuestion = false;
   @Output() nextQuestion = new EventEmitter<void>();
-
   protected get isCorrect(): boolean {
     return this.answerState === EstadoResposta.CORRETA;
   }
-
   protected onNextQuestion(): void {
     this.nextQuestion.emit();
   }
-
   protected getFeedbackClass(): string {
     return this.isCorrect ? 'feedback-correct' : 'feedback-incorrect';
   }

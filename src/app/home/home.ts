@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { QuizService } from '../services/quiz.service';
-import { HomeHeroComponent } from './home-hero';
-import { HomeFeaturesComponent } from './home-features';
-import { HomeObjectiveComponent } from './home-objective';
-import { HomeCtaComponent } from './home-cta';
+import {Component, inject} from '@angular/core';
+import {Router} from '@angular/router';
+import {QuizService} from '../services/quiz.service';
+import {HomeHeroComponent} from './home-hero';
+import {HomeFeaturesComponent} from './home-features';
+import {HomeObjectiveComponent} from './home-objective';
+import {HomeCtaComponent} from './home-cta';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +30,6 @@ import { HomeCtaComponent } from './home-cta';
 export class HomeComponent {
   private readonly router = inject(Router);
   private readonly quizService = inject(QuizService);
-
   iniciarQuiz(): void {
     // Reinicia o quiz para garantir novas perguntas
     this.quizService.reiniciarQuiz();

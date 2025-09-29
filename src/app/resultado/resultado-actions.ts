@@ -1,6 +1,6 @@
-import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ResultadoQuiz } from '../types/quiz.types';
+import {Component, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ResultadoQuiz} from '../types/quiz.types';
 
 @Component({
   selector: 'app-resultado-actions',
@@ -30,11 +30,9 @@ import { ResultadoQuiz } from '../types/quiz.types';
 export class ResultadoActionsComponent {
   @Output() restartQuiz = new EventEmitter<void>();
   @Output() goHome = new EventEmitter<void>();
-
   protected onRestartQuiz(): void {
     this.restartQuiz.emit();
   }
-
   protected onGoHome(): void {
     this.goHome.emit();
   }

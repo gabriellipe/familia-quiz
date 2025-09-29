@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Alternativa } from '../types/quiz.types';
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Alternativa} from '../types/quiz.types';
 
 @Component({
   selector: 'app-quiz-alternative-button',
@@ -31,7 +31,6 @@ export class QuizAlternativeButton {
   @Input() buttonClass = 'state-neutral';
   @Input() isSelected = false;
   @Output() selectAlternative = new EventEmitter<number>();
-
   protected onSelect(): void {
     if (!this.disabled) {
       this.selectAlternative.emit(this.index);

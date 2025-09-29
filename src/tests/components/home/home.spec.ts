@@ -1,9 +1,9 @@
-import { provideZoneChangeDetection } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { of } from 'rxjs';
-import { HomeComponent } from '../../../app/home/home';
-import { QuizService } from '../../../app/services/quiz.service';
+import {provideZoneChangeDetection} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {Router} from '@angular/router';
+import {of} from 'rxjs';
+import {HomeComponent} from '../../../app/home/home';
+import {QuizService} from '../../../app/services/quiz.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -19,8 +19,8 @@ describe('HomeComponent', () => {
       imports: [HomeComponent],
       providers: [
         provideZoneChangeDetection(),
-        { provide: QuizService, useValue: quizServiceSpy },
-        { provide: Router, useValue: routerSpy }
+        {provide: QuizService, useValue: quizServiceSpy},
+        {provide: Router, useValue: routerSpy}
       ]
     }).compileComponents();
 

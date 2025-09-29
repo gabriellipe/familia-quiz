@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-home-cta',
@@ -30,7 +30,6 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeCtaComponent {
   @Output() startQuiz = new EventEmitter<void>();
-
   protected onStartQuiz(): void {
     this.startQuiz.emit();
   }

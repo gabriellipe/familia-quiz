@@ -1,7 +1,7 @@
-import { provideZoneChangeDetection } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { QuizAlternativesComponent } from '../../../app/quiz/quiz-alternatives';
-import { PerguntaEmbaralhada, EstadoResposta } from '../../../app/types/quiz.types';
+import {provideZoneChangeDetection} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {QuizAlternativesComponent} from '../../../app/quiz/quiz-alternatives';
+import {PerguntaEmbaralhada, EstadoResposta} from '../../../app/types/quiz.types';
 
 describe('QuizAlternativesComponent', () => {
   let component: QuizAlternativesComponent;
@@ -10,9 +10,9 @@ describe('QuizAlternativesComponent', () => {
   const mockQuestion: PerguntaEmbaralhada = {
     pergunta: 'Test question?',
     alternativas: [
-      { texto: 'Option 1', justificativa: 'Just 1' },
-      { texto: 'Option 2', justificativa: 'Just 2' },
-      { texto: 'Option 3', justificativa: 'Just 3' }
+      {texto: 'Option 1', justificativa: 'Just 1'},
+      {texto: 'Option 2', justificativa: 'Just 2'},
+      {texto: 'Option 3', justificativa: 'Just 3'}
     ],
     indiceRespostaCorreta: 1
   };
