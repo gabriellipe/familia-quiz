@@ -46,7 +46,7 @@ import { EstadoResposta } from '../types/quiz.types';
                     (click)="responder($index)"
                     [disabled]="estadoResposta !== estadoRespostaNaoRespondida"
                     [class]="getButtonClass($index)"
-                    class=""
+                    class="w-full p-4 rounded-lg text-left transition-all duration-200 border-2"
                   >
                     {{ alternativa.texto }}
                   </button>
@@ -154,17 +154,17 @@ export class QuizComponent implements OnInit, OnDestroy {
     const base = 'hover:border-primary focus:outline-none focus:border-primary';
 
     if (this.estadoResposta === EstadoResposta.NAO_RESPONDIDA) {
-      return `${base} border-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700`;
+      return `${base} border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-600`;
     }
 
     const pergunta = this.perguntaAtual;
     if (!pergunta) return base;
 
     if (index === pergunta.indiceRespostaCorreta) {
-      return `${base} border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300`;
+      return `${base} border-green-500 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200`;
     }
 
-    return `${base} border-gray-300 opacity-60`;
+    return `${base} border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 opacity-75`;
   }
 
   protected getFeedbackClass(): string {
