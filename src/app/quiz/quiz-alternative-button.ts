@@ -17,7 +17,7 @@ import {Alternativa} from '../types/quiz.types';
       <div class="flex items-start gap-3">
         <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center flex-shrink-0 mt-1">
         </div>
-        <span class="font-medium leading-relaxed">{{ alternative.texto }}</span>
+        <span class="font-medium leading-relaxed text-lg md:text-base">{{ alternative.texto }}</span>
       </div>
     </button>
   `
