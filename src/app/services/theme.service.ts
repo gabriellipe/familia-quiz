@@ -32,9 +32,11 @@ export class ThemeService {
   private aplicarTema(isDark: boolean): void {
     const html = document.documentElement;
     if (isDark) {
+      html.classList.add('dark');
       html.classList.remove('light');
     } else {
       html.classList.add('light');
+      html.classList.remove('dark');
     }
   }
 }
