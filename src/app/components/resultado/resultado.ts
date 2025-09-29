@@ -1,13 +1,13 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { QuizService } from '../services/quiz.service';
-import { ResultadoHeaderComponent } from './resultado/resultado-header.component';
-import { ResultadoScoreComponent } from './resultado/resultado-score.component';
-import { ResultadoProgressComponent } from './resultado/resultado-progress.component';
-import { ResultadoStatsComponent } from './resultado/resultado-stats.component';
-import { ResultadoActionsComponent } from './resultado/resultado-actions.component';
-import { ResultadoSharingComponent } from './resultado/resultado-sharing.component';
+import { QuizService } from '../../services/quiz.service';
+import { ResultadoHeaderComponent } from './resultado-header';
+import { ResultadoScoreComponent } from './resultado-score';
+import { ResultadoProgressComponent } from './resultado-progress';
+import { ResultadoStatsComponent } from './resultado-stats';
+import { ResultadoActionsComponent } from './resultado-actions';
+import { ResultadoSharingComponent } from './resultado-sharing';
 
 @Component({
   selector: 'app-resultado',

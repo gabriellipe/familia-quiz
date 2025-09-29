@@ -2,11 +2,12 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 import { CommonModule } from '@angular/common';
 import { PerguntaEmbaralhada } from '../../types/quiz.types';
 import { EstadoResposta } from '../../types/quiz.types';
+import { QuizAlternativeButton } from './quiz-alternative-button';
 
 @Component({
   selector: 'app-quiz-alternatives',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, QuizAlternativeButton],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="surface rounded-xl shadow-lg p-6 md:p-8">
@@ -19,20 +20,16 @@ import { EstadoResposta } from '../../types/quiz.types';
 
       <div class="space-y-4">
         @for (alternativa of question.alternativas; track $index) {
-          <button
-            (click)="onSelectAlternative($index)"
-            [disabled]="isAnswered"
-            [class]="getAlternativeClass($index)"
-            class="w-full p-5 rounded-xl text-left transition-all duration-300 border-2 hover:scale-102 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 alternative-hover"
-          >
-            <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center flex-shrink-0 mt-1">
-                <div class="w-2 h-2 rounded-full bg-current opacity-0 transition-opacity duration-200" 
-                     [class.opacity-100]="isSelected($index)"></div>
-              </div>
-              <span class="font-medium leading-relaxed">{{ alternativa.texto }}</span>
-            </div>
-          </button>
+          <div class="mb-4 last:mb-0">
+            <app-quiz-alternative-button
+              [alternative]="alternativa"
+              [index]="$index"
+              [disabled]="isAnswered"
+              [buttonClass]="getAlternativeClass($index)"
+              [isSelected]="isSelected($index)"
+              (selectAlternative)="onSelectAlternative($event)"
+            />
+          </div>
         }
       </div>
     </div>

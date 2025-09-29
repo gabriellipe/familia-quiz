@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { QuizService } from '../services/quiz.service';
-import { HomeHeroComponent } from './home/home-hero.component';
-import { HomeFeaturesComponent } from './home/home-features.component';
-import { HomeObjectiveComponent } from './home/home-objective.component';
-import { HomeCtaComponent } from './home/home-cta.component';
+import { QuizService } from '../../services/quiz.service';
+import { HomeHeroComponent } from './home-hero';
+import { HomeFeaturesComponent } from './home-features';
+import { HomeObjectiveComponent } from './home-objective';
+import { HomeCtaComponent } from './home-cta';
 
 @Component({
   selector: 'app-home',

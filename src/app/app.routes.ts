@@ -3,15 +3,15 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./components/home.component').then(m => m.HomeComponent)
+    loadComponent: () => import('./components/home/home').then(m => m.HomeComponent)
   },
   {
     path: 'quiz',
-    loadComponent: () => import('./components/quiz.component').then(m => m.QuizComponent)
+    loadComponent: () => import('./components/quiz/quiz').then(m => m.QuizComponent)
   },
   {
     path: 'resultado',
-    loadComponent: () => import('./components/resultado.component').then(m => m.ResultadoComponent)
+    loadComponent: () => import('./components/resultado/resultado').then(m => m.ResultadoComponent)
   },
   {
     path: '**',

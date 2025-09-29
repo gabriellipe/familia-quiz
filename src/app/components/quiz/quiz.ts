@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { QuizService } from '../services/quiz.service';
-import { EstadoResposta } from '../types/quiz.types';
-import { QuizProgressComponent } from './quiz/quiz-progress.component';
-import { QuizAlternativesComponent } from './quiz/quiz-alternatives.component';
-import { QuizFeedbackComponent } from './quiz/quiz-feedback.component';
-import { QuizCompletionComponent } from './quiz/quiz-completion.component';
+import { QuizService } from '../../services/quiz.service';
+import { EstadoResposta } from '../../types/quiz.types';
+import { QuizProgressComponent } from './quiz-progress';
+import { QuizAlternativesComponent } from './quiz-alternatives';
+import { QuizFeedbackComponent } from './quiz-feedback';
+import { QuizCompletionComponent } from './quiz-completion';
 
 @Component({
   selector: 'app-quiz',
