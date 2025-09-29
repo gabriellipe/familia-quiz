@@ -8,46 +8,41 @@ import {EstadoResposta} from '../types/quiz.types';
 import {QuizProgressComponent} from './quiz-progress';
 import {QuizAlternativesComponent} from './quiz-alternatives';
 import {QuizFeedbackComponent} from './quiz-feedback';
-import {QuizCompletionComponent} from './quiz-completion';
 
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [CommonModule, QuizProgressComponent, QuizAlternativesComponent, QuizFeedbackComponent, QuizCompletionComponent],
+  imports: [CommonModule, QuizProgressComponent, QuizAlternativesComponent, QuizFeedbackComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="min-h-screen bg-app-gradient p-4 md:p-6">
-      @if (quizService.quizFinalizado) {
-        <app-quiz-completion />
-      } @else {
-        <div class="max-w-5xl mx-auto">
-          <app-quiz-progress
-            [currentQuestion]="getCurrentQuestion()"
-            [progressText]="quizService.progresso"
-            [score]="acertos"
-            [progressWidth]="getProgressWidth()"
+      <div class="max-w-5xl mx-auto">
+        <app-quiz-progress
+          [currentQuestion]="getCurrentQuestion()"
+          [progressText]="quizService.progresso"
+          [score]="acertos"
+          [progressWidth]="getProgressWidth()"
+        />
+
+        @if (perguntaAtual) {
+          <app-quiz-alternatives
+            [question]="perguntaAtual"
+            [selectedAlternative]="alternativaSelecionada"
+            [answerState]="estadoResposta"
+            (selectAlternative)="responder($event)"
           />
 
-          @if (perguntaAtual) {
-            <app-quiz-alternatives
-              [question]="perguntaAtual"
-              [selectedAlternative]="alternativaSelecionada"
+          @if (estadoResposta !== estadoRespostaNaoRespondida) {
+            <app-quiz-feedback
               [answerState]="estadoResposta"
-              (selectAlternative)="responder($event)"
+              [motivationalMessage]="mensagemMotivacional"
+              [justification]="justificativa"
+              [isLastQuestion]="isLastQuestion()"
+              (nextQuestion)="proximaPergunta()"
             />
-
-            @if (estadoResposta !== estadoRespostaNaoRespondida) {
-              <app-quiz-feedback
-                [answerState]="estadoResposta"
-                [motivationalMessage]="mensagemMotivacional"
-                [justification]="justificativa"
-                [isLastQuestion]="isLastQuestion()"
-                (nextQuestion)="proximaPergunta()"
-              />
-            }
           }
-        </div>
-      }
+        }
+      </div>
     </div>
   `,
   styles: []
@@ -112,9 +107,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.perguntaAtual = this.quizService.perguntaAtual;
 
     if (this.quizService.quizFinalizado) {
-      setTimeout(() => {
-        this.router.navigate(['/resultado']);
-      }, 1000);
+      this.router.navigate(['/resultado']);
     }
   }
   protected getProgressWidth(): number {
