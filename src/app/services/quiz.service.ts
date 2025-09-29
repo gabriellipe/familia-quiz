@@ -10,7 +10,7 @@ import { Pergunta, PerguntaEmbaralhada, ResultadoQuiz, EstadoResposta } from '..
 })
 export class QuizService {
   private readonly http = inject(HttpClient);
-  private readonly STORAGE_KEY = 'familia-quiz:score';
+  private readonly STORAGE_KEY = 'familia-quiz:score-v2';
 
   private perguntasSource = new BehaviorSubject<PerguntaEmbaralhada[]>([]);
   private perguntaAtualIndexSource = new BehaviorSubject<number>(0);
@@ -103,7 +103,13 @@ export class QuizService {
   }
 
   get quizFinalizado(): boolean {
-    return this.perguntaAtualIndexSource.value >= this.perguntasSource.value.length;
+    const perguntas = this.perguntasSource.value;
+    const perguntaAtualIndex = this.perguntaAtualIndexSource.value;
+    // Se não há perguntas carregadas, não está finalizado
+    if (perguntas.length === 0) {
+      return false;
+    }
+    return perguntaAtualIndex >= perguntas.length;
   }
 
   calcularResultado(): ResultadoQuiz {
@@ -138,6 +144,16 @@ export class QuizService {
     if (dadosSalvos) {
       const dados = JSON.parse(dadosSalvos);
       this.acertosSource.next(dados.acertos || 0);
+      // Garante que o índice não seja maior que o número de perguntas disponíveis
+      const perguntaIndex = dados.perguntaAtualIndex || 0;
+      const totalPerguntas = this.perguntasSource.value.length;
+      if (perguntaIndex < totalPerguntas) {
+        this.perguntaAtualIndexSource.next(perguntaIndex);
+      } else {
+        // Se o índice salvo for maior que o total, reinicia
+        this.perguntaAtualIndexSource.next(0);
+        localStorage.removeItem(this.STORAGE_KEY);
+      }
     }
   }
 
