@@ -38,15 +38,17 @@ export class QuizService {
   }
 
   private embaralharPerguntas(perguntas: Pergunta[]): PerguntaEmbaralhada[] {
-    // Filtra apenas perguntas válidas (4 alternativas não vazias)
+    // Filtra apenas perguntas válidas com 4 alternativas
     const perguntasValidas = perguntas.filter(pergunta => 
       pergunta.alternativas && 
       pergunta.alternativas.length === 4 && 
       pergunta.alternativas.every(alt => alt.texto && alt.texto.trim().length > 0)
     );
     
-    // Embaralha e pega 10 perguntas válidas
-    const perguntasEmbaralhadas = this.shuffleArray([...perguntasValidas]).slice(0, 10);
+    // Se temos menos de 10 perguntas válidas, usa todas disponíveis
+    const numPerguntas = Math.min(perguntasValidas.length, 10);
+    const perguntasEmbaralhadas = this.shuffleArray([...perguntasValidas]).slice(0, numPerguntas);
+    
     
     return perguntasEmbaralhadas.map(pergunta => {
       const respostaCorreta = pergunta.alternativas[0]; // A primeira é sempre a correta
