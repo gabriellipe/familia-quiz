@@ -1,0 +1,50 @@
+# Mensagens motivacionais para o Quiz da Família
+mensagens:
+  acerto:
+    - "Muito bem!"
+    - "Excelente!"
+    - "Parabéns!"
+    - "Perfeito!"
+    - "Continue assim!"
+    - "Fantástico!"
+    - "Isso aí!"
+    - "Você entende do assunto!"
+    - "Mandou bem!"
+    - "Arrasou!"
+    
+  erro:
+    - "Não desista!"
+    - "Você consegue!"
+    - "Continue tentando!"
+    - "Aprendemos com os erros!"
+    - "Vamos em frente!"
+    - "Faz parte do aprendizado!"
+    - "Próxima você acerta!"
+    - "Cada erro é uma lição!"
+    - "Persista, você vai longe!"
+    - "O importante é continuar!"
+
+  resultado:
+    baixo: # < 50%
+      - "Continue, você está no caminho!"
+      - "Cada erro é um aprendizado!"
+      - "O importante é começar!"
+      - "Você pode melhorar ainda mais!"
+      
+    medio: # 50% - 79%
+      - "Bom! Que tal tentar melhorar?"
+      - "Você está indo bem!"
+      - "Continue praticando!"
+      - "Boa! Vamos melhorar ainda mais?"
+      
+    alto: # 80% - 94%
+      - "Excelente!"
+      - "Muito bem! Você manda bem!"
+      - "Ótimo desempenho!"
+      - "Parabéns pelo resultado!"
+      
+    perfeito: # 95% - 100%
+      - "Perfeito! Parabéns!"
+      - "Impressionante! Você é expert!"
+      - "Resultado fantástico!"
+      - "Você domina o assunto!"
