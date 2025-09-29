@@ -5,113 +5,46 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { QuizService } from '../services/quiz.service';
 import { EstadoResposta } from '../types/quiz.types';
+import { QuizProgressComponent } from './quiz/quiz-progress.component';
+import { QuizAlternativesComponent } from './quiz/quiz-alternatives.component';
+import { QuizFeedbackComponent } from './quiz/quiz-feedback.component';
+import { QuizCompletionComponent } from './quiz/quiz-completion.component';
 
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, QuizProgressComponent, QuizAlternativesComponent, QuizFeedbackComponent, QuizCompletionComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="min-h-screen bg-app-gradient p-4 md:p-6">
       @if (quizService.quizFinalizado) {
-        <div class="max-w-md mx-auto surface rounded-xl shadow-lg p-8 text-center">
-          <div class="text-6xl mb-4">🎯</div>
-          <h2 class="text-3xl font-bold mb-4">Quiz Finalizado!</h2>
-          <p class="text-lg mb-6 text-muted">Redirecionando para os resultados...</p>
-          <div class="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto"></div>
-        </div>
+        <app-quiz-completion />
       } @else {
         <div class="max-w-5xl mx-auto">
-          <!-- Header com progresso -->
-          <div class="surface rounded-xl shadow-lg p-6 mb-6">
-            <div class="flex justify-between items-center mb-4">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold">
-                  {{ quizService.progresso.split('/')[0] }}
-                </div>
-                <div>
-                  <h1 class="text-lg font-semibold">Quiz da Família</h1>
-                  <span class="text-sm text-muted">Pergunta {{ quizService.progresso }}</span>
-                </div>
-              </div>
-              <div class="text-right">
-                <div class="text-sm text-muted">Acertos</div>
-                <div class="text-2xl font-bold text-primary">{{ acertos }}</div>
-              </div>
-            </div>
-            
-            <!-- Barra de progresso melhorada -->
-            <div class="w-full bg-progress-track rounded-full h-3 overflow-hidden">
-              <div 
-                class="h-full bg-gradient-to-r from-primary to-blue-600 rounded-full transition-all duration-500 ease-out"
-                [style.width]="getProgressWidth() + '%'"
-              ></div>
-            </div>
-            <div class="text-xs text-muted mt-2 text-center">
-              {{ getProgressWidth() | number:'1.0-0' }}% concluído
-            </div>
-          </div>
+          <app-quiz-progress
+            [currentQuestion]="getCurrentQuestion()"
+            [progressText]="quizService.progresso"
+            [score]="acertos"
+            [progressWidth]="getProgressWidth()"
+          />
 
-          <!-- Pergunta -->
           @if (perguntaAtual) {
-            <div class="surface rounded-xl shadow-lg p-6 md:p-8">
-              <div class="flex items-start gap-4 mb-8">
-                <div class="w-8 h-8 bg-indigo-context rounded-full flex items-center justify-center flex-shrink-0">
-                  <span class="text-indigo-context font-bold">?</span>
-                </div>
-                <h2 class="text-xl md:text-2xl font-semibold leading-relaxed">{{ perguntaAtual.pergunta }}</h2>
-              </div>
+            <app-quiz-alternatives
+              [question]="perguntaAtual"
+              [selectedAlternative]="alternativaSelecionada"
+              [answerState]="estadoResposta"
+              (selectAlternative)="responder($event)"
+            />
 
-              <!-- Alternativas com design melhorado -->
-              <div class="space-y-4">
-                @for (alternativa of perguntaAtual.alternativas; track $index) {
-                  <button
-                    (click)="responder($index)"
-                    [disabled]="estadoResposta !== estadoRespostaNaoRespondida"
-                    [class]="getButtonClass($index)"
-                    class="w-full p-5 rounded-xl text-left transition-all duration-300 border-2 hover:scale-102 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 alternative-hover"
-                  >
-                    <div class="flex items-start gap-3">
-                      <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center flex-shrink-0 mt-1">
-                        <div class="w-2 h-2 rounded-full bg-current opacity-0 transition-opacity duration-200" 
-                             [class.opacity-100]="isSelected($index)"></div>
-                      </div>
-                      <span class="font-medium leading-relaxed">{{ alternativa.texto }}</span>
-                    </div>
-                  </button>
-                }
-              </div>
-
-              <!-- Feedback melhorado -->
-              @if (estadoResposta !== estadoRespostaNaoRespondida) {
-                <div class="mt-8 p-6 rounded-xl border-2" [class]="getFeedbackClass()">
-                  <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-xl">
-                      {{ estadoResposta === estadoRespostaCorreta ? '✅' : '❌' }}
-                    </div>
-                    <div class="text-current">
-                      <div class="font-bold text-lg text-current">{{ mensagemMotivacional }}</div>
-                      <div class="text-sm opacity-75 text-current">
-                        {{ estadoResposta === estadoRespostaCorreta ? 'Resposta correta!' : 'Resposta incorreta' }}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  @if (justificativa) {
-                    <div class="surface-hover rounded-lg p-4 mb-4">
-                      <p class="text-sm leading-relaxed">{{ justificativa }}</p>
-                    </div>
-                  }
-
-                  <button
-                    (click)="proximaPergunta()"
-                    class="btn-primary w-full md:w-auto px-8 py-3 rounded-xl font-semibold hover:scale-105 transition-transform duration-200"
-                  >
-                    {{ isLastQuestion() ? '🏁 Ver Resultado' : '➡️ Próxima Pergunta' }}
-                  </button>
-                </div>
-              }
-            </div>
+            @if (estadoResposta !== estadoRespostaNaoRespondida) {
+              <app-quiz-feedback
+                [answerState]="estadoResposta"
+                [motivationalMessage]="mensagemMotivacional"
+                [justification]="justificativa"
+                [isLastQuestion]="isLastQuestion()"
+                (nextQuestion)="proximaPergunta()"
+              />
+            }
           }
         </div>
       }
@@ -191,44 +124,8 @@ export class QuizComponent implements OnInit, OnDestroy {
     return Math.max(0, (perguntasRespondidas / total) * 100);
   }
 
-  protected getButtonClass(index: number): string {
-    if (this.estadoResposta === EstadoResposta.NAO_RESPONDIDA) {
-      return 'state-neutral';
-    }
-
-    const pergunta = this.perguntaAtual;
-    if (!pergunta) return 'state-neutral';
-
-    const isSelected = index === this.alternativaSelecionada;
-    const isCorrect = index === pergunta.indiceRespostaCorreta;
-
-    let classes = [];
-
-    if (isSelected) {
-      classes.push('state-selected');
-    }
-
-    if (isCorrect) {
-      classes.push('state-correct');
-    } else {
-      classes.push('state-incorrect');
-    }
-
-    if (!isSelected && !isCorrect) {
-      classes.push('opacity-75');
-    }
-
-    return classes.join(' ');
-  }
-
-  protected getFeedbackClass(): string {
-    return this.estadoResposta === EstadoResposta.CORRETA
-      ? 'feedback-correct'
-      : 'feedback-incorrect';
-  }
-
-  protected isSelected(index: number): boolean {
-    return index === this.alternativaSelecionada;
+  protected getCurrentQuestion(): number {
+    return parseInt(this.quizService.progresso.split('/')[0] || '0');
   }
 
   protected isLastQuestion(): boolean {
