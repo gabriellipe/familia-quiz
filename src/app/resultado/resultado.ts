@@ -1,7 +1,7 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { QuizService } from '../../services/quiz.service';
+import { QuizService } from '../services/quiz.service';
 import { ResultadoHeaderComponent } from './resultado-header';
 import { ResultadoScoreComponent } from './resultado-score';
 import { ResultadoProgressComponent } from './resultado-progress';

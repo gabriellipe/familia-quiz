@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { QuizService } from '../../services/quiz.service';
+import { QuizService } from '../services/quiz.service';
 import { HomeHeroComponent } from './home-hero';
 import { HomeFeaturesComponent } from './home-features';
 import { HomeObjectiveComponent } from './home-objective';

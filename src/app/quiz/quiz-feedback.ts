@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EstadoResposta } from '../../types/quiz.types';
+import { EstadoResposta } from '../types/quiz.types';
 
 @Component({
   selector: 'app-quiz-feedback',

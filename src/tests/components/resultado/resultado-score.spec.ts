@@ -1,6 +1,6 @@
 import { provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ResultadoScoreComponent } from '../../../app/components/resultado/resultado-score';
+import { ResultadoScoreComponent } from '../../../app/resultado/resultado-score';
 import { ResultadoQuiz } from '../../../app/types/quiz.types';
 
 describe('ResultadoScoreComponent', () => {

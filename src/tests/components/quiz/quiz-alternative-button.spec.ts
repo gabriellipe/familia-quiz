@@ -1,6 +1,6 @@
 import { provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { QuizAlternativeButton } from '../../../app/components/quiz/quiz-alternative-button';
+import { QuizAlternativeButton } from '../../../app/quiz/quiz-alternative-button';
 import { Alternativa } from '../../../app/types/quiz.types';
 
 describe('QuizAlternativeButton', () => {

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Alternativa } from '../../types/quiz.types';
+import { Alternativa } from '../types/quiz.types';
 
 @Component({
   selector: 'app-quiz-alternative-button',
@@ -17,7 +17,7 @@ import { Alternativa } from '../../types/quiz.types';
       <div class="flex items-start gap-3">
         <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center flex-shrink-0 mt-1">
           <div class="w-2 h-2 rounded-full bg-current opacity-0 transition-opacity duration-200" 
-               [class.opacity-100]="isSelected"></div>
+               [class.opacity-100]="isSelected && buttonClass.includes('state-correct')"></div>
         </div>
         <span class="font-medium leading-relaxed">{{ alternative.texto }}</span>
       </div>

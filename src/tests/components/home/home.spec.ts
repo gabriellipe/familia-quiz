@@ -2,7 +2,7 @@ import { provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { HomeComponent } from '../../../app/components/home/home';
+import { HomeComponent } from '../../../app/home/home';
 import { QuizService } from '../../../app/services/quiz.service';
 
 describe('HomeComponent', () => {

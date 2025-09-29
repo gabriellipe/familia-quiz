@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ResultadoQuiz } from '../../types/quiz.types';
+import { ResultadoQuiz } from '../types/quiz.types';
 
 @Component({
   selector: 'app-resultado-actions',
