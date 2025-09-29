@@ -218,32 +218,87 @@ body {
   color: var(--color-indigo-text);
 }
 
-/* Classes de feedback com texto normal */
-.bg-green-feedback {
+/* Classes de estado semânticas */
+.state-correct {
   background-color: var(--color-green-bg);
-  color: var(--color-on-surface);
+  color: var(--color-green-text);
+  border-color: var(--color-green-accent);
 }
 
-.bg-red-feedback {
+.state-incorrect {
+  background-color: var(--color-red-bg);
+  color: var(--color-red-text);
+  border-color: var(--color-red-accent);
+}
+
+.state-selected {
+  border-color: var(--color-border-focus) !important;
+}
+
+.state-neutral {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  border-color: var(--color-border);
+}
+
+/* Classes de feedback com texto normal */
+.feedback-correct {
+  background-color: var(--color-green-bg);
+  color: var(--color-on-surface);
+  border-color: var(--color-green-accent);
+}
+
+.feedback-incorrect {
   background-color: var(--color-red-bg);
   color: var(--color-on-surface);
+  border-color: var(--color-red-accent);
+}
+
+/* Classes de progresso por performance */
+.progress-excellent {
+  background: linear-gradient(to right, var(--color-green-accent), #10b981);
+}
+
+.progress-good {
+  background: linear-gradient(to right, var(--color-yellow-accent), #f59e0b);
+}
+
+.progress-needs-improvement {
+  background: linear-gradient(to right, var(--color-red-accent), #ef4444);
+}
+
+/* Classes de texto por performance */
+.text-excellent {
+  color: var(--color-green-text);
+}
+
+.text-good {
+  color: var(--color-yellow-text);
+}
+
+.text-needs-improvement {
+  color: var(--color-red-text);
+}
+
+/* Classes de container por performance */
+.container-excellent {
+  background-color: var(--color-green-bg);
+  border-color: var(--color-green-accent);
+}
+
+.container-good {
+  background-color: var(--color-yellow-bg);
+  border-color: var(--color-yellow-accent);
+}
+
+.container-needs-improvement {
+  background-color: var(--color-red-bg);
+  border-color: var(--color-red-accent);
 }
 
 /* Classes de texto por contexto */
 .text-blue-context { color: var(--color-blue-text); }
-.text-green-context { color: var(--color-green-text); }
 .text-purple-context { color: var(--color-purple-text); }
-.text-red-context { color: var(--color-red-text); }
-.text-yellow-context { color: var(--color-yellow-text); }
-.text-indigo-context { color: var(--color-indigo-text); }
-
-/* Classes de accent por contexto */
-.accent-blue { color: var(--color-blue-accent); }
-.accent-green { color: var(--color-green-accent); }
-.accent-purple { color: var(--color-purple-accent); }
-.accent-red { color: var(--color-red-accent); }
-.accent-yellow { color: var(--color-yellow-accent); }
-.accent-indigo { color: var(--color-indigo-accent); }
 
 /* Classes de bordas */
 .border-custom {
@@ -263,11 +318,6 @@ body {
   border-color: var(--color-border-focus) !important;
 }
 
-.border-blue-context { border-color: var(--color-blue-accent); }
-.border-green-context { border-color: var(--color-green-accent); }
-.border-red-context { border-color: var(--color-red-accent); }
-.border-yellow-context { border-color: var(--color-yellow-accent); }
-.border-indigo-context { border-color: var(--color-indigo-accent); }
 
 /* Classes de texto */
 .text-muted {

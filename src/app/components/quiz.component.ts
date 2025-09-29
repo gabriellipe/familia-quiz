@@ -193,36 +193,38 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   protected getButtonClass(index: number): string {
     if (this.estadoResposta === EstadoResposta.NAO_RESPONDIDA) {
-      return 'border-custom surface text-current';
+      return 'state-neutral';
     }
 
     const pergunta = this.perguntaAtual;
-    if (!pergunta) return 'border-custom surface text-current';
+    if (!pergunta) return 'state-neutral';
 
-    // Após resposta selecionada:
     const isSelected = index === this.alternativaSelecionada;
     const isCorrect = index === pergunta.indiceRespostaCorreta;
 
+    let classes = [];
+
     if (isSelected) {
-      // Alternativa selecionada: sempre borda azul
-      if (isCorrect) {
-        return 'border-focus bg-green-context';
-      } else {
-        return 'border-focus bg-red-context';
-      }
-    } else if (isCorrect) {
-      // Alternativa correta (não selecionada): verde sem borda
-      return 'border-transparent bg-green-context';
-    } else {
-      // Alternativas erradas (não selecionadas): vermelhas sem borda
-      return 'border-transparent bg-red-context opacity-75';
+      classes.push('state-selected');
     }
+
+    if (isCorrect) {
+      classes.push('state-correct');
+    } else {
+      classes.push('state-incorrect');
+    }
+
+    if (!isSelected && !isCorrect) {
+      classes.push('opacity-75');
+    }
+
+    return classes.join(' ');
   }
 
   protected getFeedbackClass(): string {
     return this.estadoResposta === EstadoResposta.CORRETA
-      ? 'bg-green-feedback border-green-context'
-      : 'bg-red-feedback border-red-context';
+      ? 'feedback-correct'
+      : 'feedback-incorrect';
   }
 
   protected isSelected(index: number): boolean {

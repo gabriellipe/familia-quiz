@@ -62,11 +62,11 @@ import { QuizService } from '../services/quiz.service';
               <div class="text-xs text-muted">Perguntas</div>
             </div>
             <div class="surface-variant rounded-xl p-4">
-              <div class="text-2xl font-bold accent-green">{{ resultado.acertos }}</div>
+              <div class="text-2xl font-bold text-excellent">{{ resultado.acertos }}</div>
               <div class="text-xs text-muted">Acertos</div>
             </div>
             <div class="surface-variant rounded-xl p-4">
-              <div class="text-2xl font-bold accent-red">{{ resultado.total - resultado.acertos }}</div>
+              <div class="text-2xl font-bold text-needs-improvement">{{ resultado.total - resultado.acertos }}</div>
               <div class="text-xs text-muted">Erros</div>
             </div>
           </div>
@@ -119,23 +119,23 @@ export class ResultadoComponent {
 
   protected getProgressBarClass(): string {
     const porcentagem = this.resultado.porcentagem;
-    if (porcentagem >= 80) return 'bg-gradient-to-r from-green-500 to-emerald-500';
-    if (porcentagem >= 50) return 'bg-gradient-to-r from-yellow-500 to-orange-500';
-    return 'bg-gradient-to-r from-red-500 to-pink-500';
+    if (porcentagem >= 80) return 'progress-excellent';
+    if (porcentagem >= 50) return 'progress-good';
+    return 'progress-needs-improvement';
   }
 
   protected getMessageClass(): string {
     const porcentagem = this.resultado.porcentagem;
-    if (porcentagem >= 80) return 'text-green-context';
-    if (porcentagem >= 50) return 'text-yellow-context';
-    return 'text-red-context';
+    if (porcentagem >= 80) return 'text-excellent';
+    if (porcentagem >= 50) return 'text-good';
+    return 'text-needs-improvement';
   }
 
   protected getMessageContainerClass(): string {
     const porcentagem = this.resultado.porcentagem;
-    if (porcentagem >= 80) return 'border-green-context bg-green-context';
-    if (porcentagem >= 50) return 'border-yellow-context bg-yellow-context';
-    return 'border-red-context bg-red-context';
+    if (porcentagem >= 80) return 'container-excellent';
+    if (porcentagem >= 50) return 'container-good';
+    return 'container-needs-improvement';
   }
 
   protected getPerformanceMessage(): string {

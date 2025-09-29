@@ -45,7 +45,7 @@ import { QuizService } from '../services/quiz.service';
               </h2>
               <div class="grid gap-4">
                 <div class="flex items-start gap-4 p-4 bg-blue-context rounded-xl">
-                  <div class="w-8 h-8 accent-blue bg-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                  <div class="w-8 h-8 text-blue-context bg-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                     10
                   </div>
                   <div>
@@ -55,7 +55,7 @@ import { QuizService } from '../services/quiz.service';
                 </div>
                 
                 <div class="flex items-start gap-4 p-4 bg-green-context rounded-xl">
-                  <div class="w-8 h-8 accent-green bg-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                  <div class="w-8 h-8 text-excellent bg-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                     4
                   </div>
                   <div>
@@ -65,7 +65,7 @@ import { QuizService } from '../services/quiz.service';
                 </div>
                 
                 <div class="flex items-start gap-4 p-4 bg-purple-context rounded-xl">
-                  <div class="w-8 h-8 accent-purple bg-white rounded-full flex items-center justify-center text-sm flex-shrink-0">
+                  <div class="w-8 h-8 text-purple-context bg-white rounded-full flex items-center justify-center text-sm flex-shrink-0">
                     ⚡
                   </div>
                   <div>
@@ -100,11 +100,11 @@ import { QuizService } from '../services/quiz.service';
             <!-- Informações extras -->
             <div class="mt-6 flex justify-between text-sm text-muted">
               <span class="flex items-center gap-2">
-                <span class="accent-blue">⏱️</span>
+                <span class="text-blue-context">⏱️</span>
                 5-10 minutos
               </span>
               <span class="flex items-center gap-2">
-                <span class="accent-green">👥</span>
+                <span class="text-excellent">👥</span>
                 Todas as idades
               </span>
             </div>
