@@ -32,7 +32,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "yaml"
+            ]
           },
           "configurations": {
             "production": {
@@ -48,9 +51,7 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all",
-              "baseHref": "/familia-quiz/",
-              "deployUrl": "/familia-quiz/"
+              "outputHashing": "all"
             },
             "development": {
               "optimization": false,

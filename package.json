@@ -5,8 +5,11 @@
   "scripts": {
     "start": "bunx ng serve",
     "build": "bunx ng build",
+    "build:ssr": "bunx ng build --configuration production",
+    "serve:ssr": "node dist/familia-quiz/server/server.mjs",
     "test": "bunx ng test",
-    "lint": "bunx ng lint"
+    "lint": "bunx ng lint",
+    "serve:ssr:familia-quiz": "node dist/familia-quiz/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -16,7 +19,11 @@
     "@angular/core": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/platform-browser-dynamic": "^20.3.0",
+    "@angular/platform-server": "^20.3.0",
     "@angular/router": "^20.3.0",
+    "@angular/ssr": "^20.3.0",
+    "@nguniversal/express-engine": "^16.2.0",
+    "express": "^5.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "yaml": "^2.3.4",
@@ -32,6 +39,7 @@
     "@angular/cli": "^20.3.3",
     "@angular/compiler-cli": "^20.3.0",
     "@stylistic/eslint-plugin": "^5.4.0",
+    "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",

@@ -93,10 +93,23 @@ export class QuizService {
     this.estadoRespostaSource.next(EstadoResposta.NAO_RESPONDIDA);
     this.justificativaSource.next('');
   }
+
+  irParaPergunta(index: number): void {
+    const perguntas = this.perguntasSource.value;
+    if (index >= 0 && index < perguntas.length) {
+      this.perguntaAtualIndexSource.next(index);
+      this.estadoRespostaSource.next(EstadoResposta.NAO_RESPONDIDA);
+      this.justificativaSource.next('');
+    }
+  }
   get perguntaAtual(): PerguntaEmbaralhada | undefined {
     const perguntas = this.perguntasSource.value;
     const index = this.perguntaAtualIndexSource.value;
     return perguntas[index];
+  }
+
+  get perguntaAtualIndex(): number {
+    return this.perguntaAtualIndexSource.value;
   }
   get progresso(): string {
     const index = this.perguntaAtualIndexSource.value;

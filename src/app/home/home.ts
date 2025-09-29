@@ -34,7 +34,7 @@ export class HomeComponent {
     // Reinicia o quiz para garantir novas perguntas
     this.quizService.reiniciarQuiz();
     this.quizService.carregarPerguntas().subscribe(() => {
-      this.router.navigate(['/quiz']);
+      this.router.navigate(['/quiz'], {queryParams: {q: 1}});
     });
   }
 }

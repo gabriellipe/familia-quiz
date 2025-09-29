@@ -1,6 +1,6 @@
 import {Component, inject, ChangeDetectionStrategy, OnInit, OnDestroy} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {QuizService} from '../services/quiz.service';
@@ -55,6 +55,7 @@ import {QuizCompletionComponent} from './quiz-completion';
 export class QuizComponent implements OnInit, OnDestroy {
   protected readonly quizService = inject(QuizService);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
   private readonly destroy$ = new Subject<void>();
   protected readonly estadoRespostaNaoRespondida = EstadoResposta.NAO_RESPONDIDA;
   protected readonly estadoRespostaCorreta = EstadoResposta.CORRETA;
@@ -65,6 +66,17 @@ export class QuizComponent implements OnInit, OnDestroy {
   protected acertos = 0;
   protected alternativaSelecionada: number | undefined = undefined;
   ngOnInit(): void {
+    // Sincronizar com query parameters
+    this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(params => {
+      const questionNumber = params['q'];
+      if (questionNumber) {
+        const qIndex = parseInt(questionNumber) - 1;
+        if (qIndex >= 0 && qIndex !== this.quizService.perguntaAtualIndex) {
+          this.quizService.irParaPergunta(qIndex);
+        }
+      }
+    });
+
     this.quizService.estadoResposta$.pipe(takeUntil(this.destroy$)).subscribe(estado => {
       this.estadoResposta = estado;
     });
@@ -77,8 +89,10 @@ export class QuizComponent implements OnInit, OnDestroy {
       this.acertos = acertos;
     });
 
-    this.quizService.perguntaAtualIndex$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+    this.quizService.perguntaAtualIndex$.pipe(takeUntil(this.destroy$)).subscribe((index) => {
       this.perguntaAtual = this.quizService.perguntaAtual;
+      // Atualizar URL com query parameter
+      this.updateUrlWithQuestion(index + 1);
     });
   }
   ngOnDestroy(): void {
@@ -123,5 +137,14 @@ export class QuizComponent implements OnInit, OnDestroy {
     const total = parseInt(this.quizService.progresso.split('/')[1] || '1');
     const current = parseInt(this.quizService.progresso.split('/')[0] || '0');
     return current === total;
+  }
+
+  private updateUrlWithQuestion(questionNumber: number): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {q: questionNumber},
+      queryParamsHandling: 'merge',
+      replaceUrl: true
+    });
   }
 }
