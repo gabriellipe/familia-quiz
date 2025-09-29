@@ -18,37 +18,26 @@ import {ResultadoSharingComponent} from './resultado-sharing';
     <div class="min-h-screen bg-app-gradient flex items-center justify-center p-4 md:p-6">
       <div class="max-w-4xl mx-auto">
         <div class="surface rounded-2xl shadow-2xl p-8 md:p-12 text-center">
-          @if (isLoading) {
-            <!-- Skeleton loading -->
-            <div class="animate-pulse">
-              <div class="h-16 bg-gray-200 rounded mb-6"></div>
-              <div class="h-24 bg-gray-200 rounded mb-6"></div>
-              <div class="h-32 bg-gray-200 rounded mb-6"></div>
-              <div class="h-20 bg-gray-200 rounded mb-6"></div>
-              <div class="h-16 bg-gray-200 rounded"></div>
-            </div>
-          } @else {
-            <app-resultado-header [emoji]="getEmoji()" />
-            
-            <app-resultado-score [resultado]="resultado" />
-            
-            <app-resultado-progress
-              [resultado]="resultado"
-              [progressBarClass]="getProgressBarClass()"
-              [messageClass]="getMessageClass()"
-              [messageContainerClass]="getMessageContainerClass()"
-              [performanceMessage]="getPerformanceMessage()"
-            />
-            
-            <app-resultado-stats [resultado]="resultado" />
-            
-            <app-resultado-actions
-              (restartQuiz)="reiniciarQuiz()"
-              (goHome)="voltarInicio()"
-            />
-            
-            <app-resultado-sharing [percentage]="resultado.porcentagem" />
-          }
+          <app-resultado-header [emoji]="getEmoji()" />
+          
+          <app-resultado-score [resultado]="resultado" />
+          
+          <app-resultado-progress
+            [resultado]="resultado"
+            [progressBarClass]="getProgressBarClass()"
+            [messageClass]="getMessageClass()"
+            [messageContainerClass]="getMessageContainerClass()"
+            [performanceMessage]="getPerformanceMessage()"
+          />
+          
+          <app-resultado-stats [resultado]="resultado" />
+          
+          <app-resultado-actions
+            (restartQuiz)="reiniciarQuiz()"
+            (goHome)="voltarInicio()"
+          />
+          
+          <app-resultado-sharing [percentage]="resultado.porcentagem" />
         </div>
       </div>
     </div>
@@ -59,18 +48,10 @@ export class ResultadoComponent implements OnInit {
   protected readonly quizService = inject(QuizService);
   private readonly router = inject(Router);
   protected resultado = this.quizService.calcularResultado();
-  protected isLoading = false;
 
   ngOnInit(): void {
-    // Cache e otimização do resultado
-    if (!this.resultado || this.resultado.total === 0) {
-      this.isLoading = true;
-      // Simular carregamento otimizado
-      setTimeout(() => {
-        this.resultado = this.quizService.calcularResultado();
-        this.isLoading = false;
-      }, 100);
-    }
+    // Calcular resultado imediatamente
+    this.resultado = this.quizService.calcularResultado();
   }
   protected getEmoji(): string {
     const porcentagem = this.resultado.porcentagem;

@@ -18,7 +18,7 @@ import {CommonModule} from '@angular/common';
 
       <button
         (click)="onGoHome()"
-        class="w-full py-4 px-8 text-lg font-medium rounded-xl border-2 border-custom surface surface-hover transition-all duration-300 flex items-center justify-center gap-3"
+        class="w-full py-4 px-8 text-lg font-medium rounded-xl border-2 border-custom surface surface-hover transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer"
       >
         <span class="text-xl">🏠</span>
         Voltar ao Início

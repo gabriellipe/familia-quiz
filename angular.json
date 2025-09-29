@@ -51,7 +51,9 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/familia-quiz/",
+              "deployUrl": "/familia-quiz/"
             },
             "development": {
               "optimization": false,
