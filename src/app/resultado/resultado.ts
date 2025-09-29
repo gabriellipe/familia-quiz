@@ -1,4 +1,4 @@
-import {Component, inject, ChangeDetectionStrategy, OnInit} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {QuizService} from '../services/quiz.service';
@@ -8,6 +8,7 @@ import {ResultadoProgressComponent} from './resultado-progress';
 import {ResultadoStatsComponent} from './resultado-stats';
 import {ResultadoActionsComponent} from './resultado-actions';
 import {ResultadoSharingComponent} from './resultado-sharing';
+import {ResultadoQuiz} from '../types/quiz.types';
 
 @Component({
   selector: 'app-resultado',
@@ -20,24 +21,24 @@ import {ResultadoSharingComponent} from './resultado-sharing';
         <div class="surface rounded-2xl shadow-2xl p-8 md:p-12 text-center">
           <app-resultado-header [emoji]="getEmoji()" />
           
-          <app-resultado-score [resultado]="resultado" />
+          <app-resultado-score [resultado]="resultado()" />
           
           <app-resultado-progress
-            [resultado]="resultado"
+            [resultado]="resultado()"
             [progressBarClass]="getProgressBarClass()"
             [messageClass]="getMessageClass()"
             [messageContainerClass]="getMessageContainerClass()"
             [performanceMessage]="getPerformanceMessage()"
           />
           
-          <app-resultado-stats [resultado]="resultado" />
+          <app-resultado-stats [resultado]="resultado()" />
           
           <app-resultado-actions
             (restartQuiz)="reiniciarQuiz()"
             (goHome)="voltarInicio()"
           />
           
-          <app-resultado-sharing [percentage]="resultado.porcentagem" />
+          <app-resultado-sharing [percentage]="resultado().porcentagem" />
         </div>
       </div>
     </div>
@@ -47,39 +48,43 @@ import {ResultadoSharingComponent} from './resultado-sharing';
 export class ResultadoComponent implements OnInit {
   protected readonly quizService = inject(QuizService);
   private readonly router = inject(Router);
-  protected resultado = this.quizService.calcularResultado();
+  protected resultado = signal<ResultadoQuiz>({acertos: 0, total: 0, porcentagem: 0, mensagem: ''});
 
   ngOnInit(): void {
-    // Calcular resultado imediatamente
-    this.resultado = this.quizService.calcularResultado();
+    // Aguardar o carregamento das perguntas e calcular resultado
+    this.quizService.perguntas$.subscribe(perguntas => {
+      if (perguntas.length > 0) {
+        this.resultado.set(this.quizService.calcularResultado());
+      }
+    });
   }
   protected getEmoji(): string {
-    const porcentagem = this.resultado.porcentagem;
+    const porcentagem = this.resultado().porcentagem;
     if (porcentagem >= 95) return '🏆';
     if (porcentagem >= 80) return '🎉';
     if (porcentagem >= 50) return '👍';
     return '💪';
   }
   protected getProgressBarClass(): string {
-    const porcentagem = this.resultado.porcentagem;
+    const porcentagem = this.resultado().porcentagem;
     if (porcentagem >= 80) return 'progress-excellent';
     if (porcentagem >= 50) return 'progress-good';
     return 'progress-needs-improvement';
   }
   protected getMessageClass(): string {
-    const porcentagem = this.resultado.porcentagem;
+    const porcentagem = this.resultado().porcentagem;
     if (porcentagem >= 80) return 'text-excellent';
     if (porcentagem >= 50) return 'text-good';
     return 'text-needs-improvement';
   }
   protected getMessageContainerClass(): string {
-    const porcentagem = this.resultado.porcentagem;
+    const porcentagem = this.resultado().porcentagem;
     if (porcentagem >= 80) return 'container-excellent';
     if (porcentagem >= 50) return 'container-good';
     return 'container-needs-improvement';
   }
   protected getPerformanceMessage(): string {
-    const porcentagem = this.resultado.porcentagem;
+    const porcentagem = this.resultado().porcentagem;
     if (porcentagem >= 95) return 'Desempenho perfeito! Você é um expert em uso consciente de tecnologia!';
     if (porcentagem >= 80) return 'Excelente desempenho! Você entende bem sobre tecnologia e família.';
     if (porcentagem >= 50) return 'Bom trabalho! Continue aprendendo sobre uso equilibrado de tecnologia.';

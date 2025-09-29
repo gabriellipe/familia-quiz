@@ -12,7 +12,7 @@ import {Alternativa} from '../types/quiz.types';
       (click)="onSelect()"
       [disabled]="disabled"
       [class]="buttonClass"
-      class="w-full p-5 rounded-xl text-left transition-all duration-300 border-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 alternative-hover"
+      class="w-full p-5 rounded-xl text-left transition-all duration-300 border-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 alternative-hover cursor-pointer"
     >
       <div class="flex items-start gap-3">
         <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center flex-shrink-0 mt-1">
