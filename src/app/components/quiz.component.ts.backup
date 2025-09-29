@@ -24,9 +24,9 @@ import { EstadoResposta } from '../types/quiz.types';
           <div class="mb-6">
             <div class="flex justify-between items-center mb-2">
               <span class="text-sm font-medium">Progresso</span>
-              <span class="text-sm text-muted">{{ quizService.progresso }}</span>
+              <span class="text-sm text-gray-600">{{ quizService.progresso }}</span>
             </div>
-            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+            <div class="w-full bg-gray-200 rounded-full h-2">
               <div 
                 class="bg-primary h-2 rounded-full transition-all duration-300"
                 [style.width]="getProgressWidth() + '%'"
@@ -46,7 +46,7 @@ import { EstadoResposta } from '../types/quiz.types';
                     (click)="responder($index)"
                     [disabled]="estadoResposta !== estadoRespostaNaoRespondida"
                     [class]="getButtonClass($index)"
-                    class=""
+                    class="w-full p-4 rounded-lg text-left transition-all duration-200 border-2"
                   >
                     {{ alternativa.texto }}
                   </button>
@@ -80,7 +80,7 @@ import { EstadoResposta } from '../types/quiz.types';
           }
 
           <!-- Score atual -->
-          <div class="text-center text-sm text-muted">
+          <div class="text-center text-sm text-gray-600">
             Acertos: {{ acertos }} / {{ quizService.progresso.split('/')[1] }}
           </div>
         </div>
