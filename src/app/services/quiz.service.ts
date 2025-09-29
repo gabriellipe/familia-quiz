@@ -37,7 +37,10 @@ export class QuizService {
   }
 
   private embaralharPerguntas(perguntas: Pergunta[]): PerguntaEmbaralhada[] {
-    return this.shuffleArray([...perguntas]).map(pergunta => {
+    // Embaralha todas as perguntas e pega apenas 10
+    const perguntasEmbaralhadas = this.shuffleArray([...perguntas]).slice(0, 10);
+    
+    return perguntasEmbaralhadas.map(pergunta => {
       const respostaCorreta = pergunta.alternativas[0]; // A primeira é sempre a correta
       const alternativasEmbaralhadas = this.shuffleArray([...pergunta.alternativas]);
       const novoIndiceResposta = alternativasEmbaralhadas.findIndex(alt => alt.texto === respostaCorreta.texto);
@@ -144,6 +147,8 @@ export class QuizService {
     this.estadoRespostaSource.next(EstadoResposta.NAO_RESPONDIDA);
     this.justificativaSource.next('');
     localStorage.removeItem(this.STORAGE_KEY);
+    // Limpa as perguntas para forçar recarregamento
+    this.perguntasSource.next([]);
   }
 
   getMensagemMotivacional(acertou: boolean): string {
