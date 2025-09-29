@@ -1,6 +1,6 @@
 import { provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeFeaturesComponent } from './home-features';
+import { HomeFeaturesComponent } from '../../../app/components/home/home-features';
 
 describe('HomeFeaturesComponent', () => {
   let component: HomeFeaturesComponent;

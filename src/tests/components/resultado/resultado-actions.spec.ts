@@ -1,6 +1,6 @@
 import { provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ResultadoActionsComponent } from './resultado-actions';
+import { ResultadoActionsComponent } from '../../../app/components/resultado/resultado-actions';
 
 describe('ResultadoActionsComponent', () => {
   let component: ResultadoActionsComponent;

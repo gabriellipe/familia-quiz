@@ -1,6 +1,6 @@
 import { provideZoneChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeCtaComponent } from './home-cta';
+import { HomeCtaComponent } from '../../../app/components/home/home-cta';
 
 describe('HomeCtaComponent', () => {
   let component: HomeCtaComponent;

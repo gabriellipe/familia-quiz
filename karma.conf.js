@@ -33,10 +33,10 @@ module.exports = function (config) {
       ]
     },
     reporters: ['progress', 'kjhtml'],
-    browsers: ['ChromeHeadlessNoSandbox'],
+    browsers: ['Chrome'],
     customLaunchers: {
-      ChromeHeadlessNoSandbox: {
-        base: 'Chrome',
+      ChromiumHeadless: {
+        base: 'Chromium',
         flags: [
           '--headless',
           '--disable-gpu',
