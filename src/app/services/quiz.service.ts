@@ -17,12 +17,18 @@ export class QuizService {
   private estadoRespostaSource = new BehaviorSubject<EstadoResposta>(EstadoResposta.NAO_RESPONDIDA);
   private justificativaSource = new BehaviorSubject<string>('');
   private respostaSelecionadaSource = new BehaviorSubject<number | undefined>(undefined);
+  private mensagens: {acerto: string[], erro: string[]} = {acerto: [], erro: []};
   readonly perguntas$ = this.perguntasSource.asObservable();
   readonly perguntaAtualIndex$ = this.perguntaAtualIndexSource.asObservable();
   readonly acertos$ = this.acertosSource.asObservable();
   readonly estadoResposta$ = this.estadoRespostaSource.asObservable();
   readonly justificativa$ = this.justificativaSource.asObservable();
   carregarPerguntas(): Observable<PerguntaEmbaralhada[]> {
+    // Carrega mensagens primeiro se ainda não carregadas
+    if (this.mensagens.acerto.length === 0) {
+      this.carregarMensagens().subscribe();
+    }
+    
     return this.http.get('assets/perguntas.yaml', {responseType: 'text'}).pipe(
       map((yamlContent: string) => {
         const perguntas = parse(yamlContent) as Pergunta[];
@@ -31,6 +37,15 @@ export class QuizService {
         // Carrega progresso DEPOIS de definir as perguntas
         this.carregarProgresso();
         return perguntasEmbaralhadas;
+      })
+    );
+  }
+
+  private carregarMensagens(): Observable<void> {
+    return this.http.get('assets/mensagens.yaml', {responseType: 'text'}).pipe(
+      map((yamlContent: string) => {
+        const dados = parse(yamlContent);
+        this.mensagens = dados.mensagens;
       })
     );
   }
@@ -177,24 +192,17 @@ export class QuizService {
     this.perguntasSource.next([]);
   }
   getMensagemMotivacional(acertou: boolean): string {
-    if (acertou) {
-      const mensagens = [
-        'Muito bem!',
-        'Excelente!',
-        'Parabéns!',
-        'Perfeito!',
-        'Continue assim!'
-      ];
-      return mensagens[Math.floor(Math.random() * mensagens.length)] || 'Muito bem!';
-    } else {
-      const mensagens = [
-        'Não desista!',
-        'Você consegue!',
-        'Continue tentando!',
-        'Aprendemos com os erros!',
-        'Vamos em frente!'
-      ];
-      return mensagens[Math.floor(Math.random() * mensagens.length)] || 'Não desista!';
+    const mensagensDisponiveis = acertou ? this.mensagens.acerto : this.mensagens.erro;
+    
+    // Fallback para mensagens padrão caso o YAML não tenha carregado ainda
+    if (mensagensDisponiveis.length === 0) {
+      if (acertou) {
+        return 'Muito bem!';
+      } else {
+        return 'Não desista!';
+      }
     }
+    
+    return mensagensDisponiveis[Math.floor(Math.random() * mensagensDisponiveis.length)];
   }
 }
