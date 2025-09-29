@@ -27,7 +27,7 @@ export class QuizService {
   carregarPerguntas(): Observable<PerguntaEmbaralhada[]> {
     return this.http.get('assets/perguntas.yaml', { responseType: 'text' }).pipe(
       map((yamlContent: string) => {
-        const yamlData = parse(yamlContent); const perguntas = yamlData.perguntas as Pergunta[];
+        const perguntas = parse(yamlContent) as Pergunta[];
         const perguntasEmbaralhadas = this.embaralharPerguntas(perguntas);
         this.perguntasSource.next(perguntasEmbaralhadas);
         // Carrega progresso DEPOIS de definir as perguntas
