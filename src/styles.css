@@ -34,7 +34,8 @@
   /* Backgrounds específicos */
   --color-bg-gradient-start: #dbeafe;
   --color-bg-gradient-end: #e0e7ff;
-  --color-progress-bg: #e5e7eb;
+  --color-progress-track: #e5e7eb;
+  --color-card-subtle: #f3f4f6;
   
   /* Cores específicas por contexto */
   --color-blue-bg: #dbeafe;
@@ -56,16 +57,6 @@
   --color-indigo-text: #4338ca;
   --color-indigo-accent: #6366f1;
   
-  /* Grays */
-  --color-gray-50: #f9fafb;
-  --color-gray-100: #f3f4f6;
-  --color-gray-200: #e5e7eb;
-  --color-gray-300: #d1d5db;
-  --color-gray-400: #9ca3af;
-  --color-gray-500: #6b7280;
-  --color-gray-600: #4b5563;
-  --color-gray-700: #374151;
-  --color-gray-800: #1f2937;
 }
 
 :root.dark {
@@ -100,7 +91,8 @@
   /* Backgrounds específicos */
   --color-bg-gradient-start: #0f172a;
   --color-bg-gradient-end: #1e293b;
-  --color-progress-bg: #374151;
+  --color-progress-track: #475569;
+  --color-card-subtle: #334155;
   
   /* Cores específicas por contexto */
   --color-blue-bg: rgba(59, 130, 246, 0.2);
@@ -122,16 +114,6 @@
   --color-indigo-text: #a5b4fc;
   --color-indigo-accent: #818cf8;
   
-  /* Grays */
-  --color-gray-50: #1e293b;
-  --color-gray-100: #334155;
-  --color-gray-200: #475569;
-  --color-gray-300: #64748b;
-  --color-gray-400: #94a3b8;
-  --color-gray-500: #cbd5e1;
-  --color-gray-600: #e2e8f0;
-  --color-gray-700: #f1f5f9;
-  --color-gray-800: #f8fafc;
 }
 
 /* Reset básico */
@@ -297,8 +279,8 @@ body {
 }
 
 /* Classes utilitárias específicas */
-.bg-progress-track { background-color: var(--color-gray-200); }
-.bg-card-subtle { background-color: var(--color-gray-100); }
+.bg-progress-track { background-color: var(--color-progress-track); }
+.bg-card-subtle { background-color: var(--color-card-subtle); }
 
 /* Botões customizados */
 .btn-primary {
