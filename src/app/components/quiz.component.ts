@@ -132,6 +132,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   protected justificativa = '';
   protected mensagemMotivacional = '';
   protected acertos = 0;
+  protected alternativaSelecionada: number | undefined = undefined;
 
   ngOnInit(): void {
     this.quizService.estadoResposta$.pipe(takeUntil(this.destroy$)).subscribe(estado => {
@@ -157,6 +158,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   protected responder(indiceAlternativa: number): void {
+    this.alternativaSelecionada = indiceAlternativa;
     this.quizService.responder(indiceAlternativa);
     this.mensagemMotivacional = this.quizService.getMensagemMotivacional(
       this.estadoResposta === EstadoResposta.CORRETA
@@ -164,6 +166,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   protected proximaPergunta(): void {
+    this.alternativaSelecionada = undefined; // Reset para próxima pergunta
     this.quizService.proximaPergunta();
     this.perguntaAtual = this.quizService.perguntaAtual;
 
@@ -177,24 +180,45 @@ export class QuizComponent implements OnInit, OnDestroy {
   protected getProgressWidth(): number {
     const atual = parseInt(this.quizService.progresso.split('/')[0] || '0');
     const total = parseInt(this.quizService.progresso.split('/')[1] || '1');
-    return (atual / total) * 100;
+    
+    // Se ainda não respondeu nenhuma pergunta, retorna 0
+    if (this.estadoResposta === EstadoResposta.NAO_RESPONDIDA && atual === 1) {
+      return 0;
+    }
+    
+    // Progresso baseado em perguntas respondidas, não na pergunta atual
+    const perguntasRespondidas = atual - (this.estadoResposta === EstadoResposta.NAO_RESPONDIDA ? 1 : 0);
+    return Math.max(0, (perguntasRespondidas / total) * 100);
   }
 
   protected getButtonClass(index: number): string {
-    const base = 'hover:border-primary/50 focus:border-primary';
+    const baseHover = 'hover:border-primary/50 focus:border-primary';
 
     if (this.estadoResposta === EstadoResposta.NAO_RESPONDIDA) {
-      return `${base} border-gray-300 dark:border-gray-600 surface hover:bg-blue-50 dark:hover:bg-blue-900/20 text-current`;
+      return `${baseHover} border-gray-300 dark:border-gray-600 surface hover:bg-blue-50 dark:hover:bg-blue-900/20 text-current`;
     }
 
     const pergunta = this.perguntaAtual;
-    if (!pergunta) return base;
+    if (!pergunta) return baseHover;
 
-    if (index === pergunta.indiceRespostaCorreta) {
-      return `${base} border-green-500 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300`;
+    // Após resposta selecionada:
+    const isSelected = index === this.alternativaSelecionada;
+    const isCorrect = index === pergunta.indiceRespostaCorreta;
+
+    if (isSelected) {
+      // Alternativa selecionada: sempre borda azul
+      if (isCorrect) {
+        return 'border-primary border-2 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300';
+      } else {
+        return 'border-primary border-2 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300';
+      }
+    } else if (isCorrect) {
+      // Alternativa correta (não selecionada): verde sem borda
+      return 'border-transparent bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300';
+    } else {
+      // Alternativas erradas (não selecionadas): vermelhas sem borda
+      return 'border-transparent bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 opacity-75';
     }
-
-    return `${base} border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 opacity-75`;
   }
 
   protected getFeedbackClass(): string {
@@ -204,7 +228,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   protected isSelected(index: number): boolean {
-    return false; // Placeholder for visual selection indicator
+    return index === this.alternativaSelecionada;
   }
 
   protected isLastQuestion(): boolean {
