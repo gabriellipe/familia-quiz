@@ -44,7 +44,9 @@ export class QuizAlternativesComponent {
     return this.answerState !== EstadoResposta.NAO_RESPONDIDA;
   }
   protected onSelectAlternative(index: number): void {
-    this.selectAlternative.emit(index);
+    if (!this.isAnswered) {
+      this.selectAlternative.emit(index);
+    }
   }
   protected isSelected(index: number): boolean {
     return index === this.selectedAlternative;
