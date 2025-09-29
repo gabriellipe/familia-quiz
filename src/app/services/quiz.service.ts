@@ -27,9 +27,10 @@ export class QuizService {
   carregarPerguntas(): Observable<PerguntaEmbaralhada[]> {
     return this.http.get('assets/perguntas.yaml', { responseType: 'text' }).pipe(
       map((yamlContent: string) => {
-        const perguntas = parse(yamlContent) as Pergunta[];
+        const yamlData = parse(yamlContent); const perguntas = yamlData.perguntas as Pergunta[];
         const perguntasEmbaralhadas = this.embaralharPerguntas(perguntas);
         this.perguntasSource.next(perguntasEmbaralhadas);
+        // Carrega progresso DEPOIS de definir as perguntas
         this.carregarProgresso();
         return perguntasEmbaralhadas;
       })
@@ -142,16 +143,16 @@ export class QuizService {
   private carregarProgresso(): void {
     const dadosSalvos = localStorage.getItem(this.STORAGE_KEY);
     if (dadosSalvos) {
-      const dados = JSON.parse(dadosSalvos);
-      this.acertosSource.next(dados.acertos || 0);
-      // Garante que o índice não seja maior que o número de perguntas disponíveis
-      const perguntaIndex = dados.perguntaAtualIndex || 0;
-      const totalPerguntas = this.perguntasSource.value.length;
-      if (perguntaIndex < totalPerguntas) {
-        this.perguntaAtualIndexSource.next(perguntaIndex);
-      } else {
-        // Se o índice salvo for maior que o total, reinicia
-        this.perguntaAtualIndexSource.next(0);
+      try {
+        const dados = JSON.parse(dadosSalvos);
+        this.acertosSource.next(dados.acertos || 0);
+        // Só carrega o índice se for válido
+        const perguntaIndex = dados.perguntaAtualIndex || 0;
+        if (perguntaIndex >= 0 && perguntaIndex < 10) {
+          this.perguntaAtualIndexSource.next(perguntaIndex);
+        }
+      } catch (error) {
+        // Se há erro no localStorage, limpa
         localStorage.removeItem(this.STORAGE_KEY);
       }
     }
