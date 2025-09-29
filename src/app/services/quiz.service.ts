@@ -17,7 +17,20 @@ export class QuizService {
   private estadoRespostaSource = new BehaviorSubject<EstadoResposta>(EstadoResposta.NAO_RESPONDIDA);
   private justificativaSource = new BehaviorSubject<string>('');
   private respostaSelecionadaSource = new BehaviorSubject<number | undefined>(undefined);
-  private mensagens: {acerto: string[], erro: string[]} = {acerto: [], erro: []};
+  private mensagens: {
+    acerto: string[], 
+    erro: string[], 
+    resultado: {
+      baixo: string[], 
+      medio: string[], 
+      alto: string[], 
+      perfeito: string[]
+    }
+  } = {
+    acerto: [], 
+    erro: [], 
+    resultado: {baixo: [], medio: [], alto: [], perfeito: []}
+  };
   readonly perguntas$ = this.perguntasSource.asObservable();
   readonly perguntaAtualIndex$ = this.perguntaAtualIndexSource.asObservable();
   readonly acertos$ = this.acertosSource.asObservable();
@@ -145,18 +158,38 @@ export class QuizService {
     const total = this.perguntasSource.value.length;
     const porcentagem = Math.round((acertos / total) * 100);
 
-    let mensagem = '';
-    if (porcentagem < 50) {
-      mensagem = 'Continue, você está no caminho!';
-    } else if (porcentagem < 80) {
-      mensagem = 'Bom! Que tal tentar melhorar?';
-    } else if (porcentagem < 95) {
-      mensagem = 'Excelente!';
-    } else {
-      mensagem = 'Perfeito! Parabéns!';
-    }
+    let mensagem = this.getMensagemResultado(porcentagem);
 
     return {acertos, total, porcentagem, mensagem};
+  }
+
+  private getMensagemResultado(porcentagem: number): string {
+    let mensagensDisponiveis: string[] = [];
+    
+    if (porcentagem < 50) {
+      mensagensDisponiveis = this.mensagens.resultado.baixo;
+    } else if (porcentagem < 80) {
+      mensagensDisponiveis = this.mensagens.resultado.medio;
+    } else if (porcentagem < 95) {
+      mensagensDisponiveis = this.mensagens.resultado.alto;
+    } else {
+      mensagensDisponiveis = this.mensagens.resultado.perfeito;
+    }
+
+    // Fallback para mensagens padrão caso o YAML não tenha carregado ainda
+    if (mensagensDisponiveis.length === 0) {
+      if (porcentagem < 50) {
+        return 'Continue, você está no caminho!';
+      } else if (porcentagem < 80) {
+        return 'Bom! Que tal tentar melhorar?';
+      } else if (porcentagem < 95) {
+        return 'Excelente!';
+      } else {
+        return 'Perfeito! Parabéns!';
+      }
+    }
+
+    return mensagensDisponiveis[Math.floor(Math.random() * mensagensDisponiveis.length)];
   }
   private salvarProgresso(): void {
     const dados = {
