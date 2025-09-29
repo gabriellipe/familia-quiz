@@ -69,7 +69,7 @@ import { EstadoResposta } from '../types/quiz.types';
                     (click)="responder($index)"
                     [disabled]="estadoResposta !== estadoRespostaNaoRespondida"
                     [class]="getButtonClass($index)"
-                    class="w-full p-5 rounded-xl text-left transition-all duration-300 border-2 hover:scale-102 hover:shadow-md hover:border-focus focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    class="w-full p-5 rounded-xl text-left transition-all duration-300 border-2 hover:scale-102 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 alternative-hover"
                   >
                     <div class="flex items-start gap-3">
                       <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center flex-shrink-0 mt-1">

@@ -276,6 +276,11 @@ body {
   border-color: var(--color-border-focus);
 }
 
+/* Classe específica para hover das alternativas */
+.alternative-hover:hover {
+  border-color: var(--color-border-focus) !important;
+}
+
 .border-blue-context { border-color: var(--color-blue-accent); }
 .border-green-context { border-color: var(--color-green-accent); }
 .border-red-context { border-color: var(--color-red-accent); }
