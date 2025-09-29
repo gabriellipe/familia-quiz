@@ -154,35 +154,35 @@ body {
 @media (max-width: 767px) {
   html { font-size: 18px; } /* Increase base size for mobile */
   
-  .text-xs { font-size: 0.8rem; }
-  .text-sm { font-size: 0.9rem; }
-  .text-base { font-size: 1rem; }
-  .text-lg { font-size: 1.15rem; }
-  .text-xl { font-size: 1.3rem; }
-  .text-2xl { font-size: 1.6rem; }
-  .text-3xl { font-size: 2rem; }
-  .text-4xl { font-size: 2.5rem; }
-  .text-5xl { font-size: 3rem; }
-  .text-6xl { font-size: 3.5rem; }
-  .text-7xl { font-size: 4rem; }
-  .text-8xl { font-size: 4.5rem; }
+  .text-detail { font-size: 0.8rem; } /* Para informações pequenas */
+  .text-caption { font-size: 0.9rem; } /* Para legendas */
+  .text-body { font-size: 1rem; } /* Texto base */
+  .text-subtitle { font-size: 1.15rem; } /* Subtítulos */
+  .text-icon { font-size: 1.3rem; } /* Ícones pequenos */
+  .text-heading { font-size: 1.6rem; } /* Cabeçalhos */
+  .text-title { font-size: 2rem; } /* Títulos */
+  .text-hero { font-size: 2.5rem; } /* Títulos principais */
+  .text-display { font-size: 3rem; } /* Display */
+  .text-emoji-large { font-size: 3.5rem; } /* Emojis grandes */
+  .text-emoji-huge { font-size: 4rem; } /* Emojis enormes */
+  .text-logo { font-size: 4.5rem; } /* Logo/Brand */
 }
 
 @media (min-width: 768px) {
   html { font-size: 16px; } /* Standard size for desktop */
   
-  .text-xs { font-size: 0.75rem; }
-  .text-sm { font-size: 0.875rem; }
-  .text-base { font-size: 1rem; }
-  .text-lg { font-size: 1.125rem; }
-  .text-xl { font-size: 1.25rem; }
-  .text-2xl { font-size: 1.5rem; }
-  .text-3xl { font-size: 1.875rem; }
-  .text-4xl { font-size: 2.25rem; }
-  .text-5xl { font-size: 3rem; }
-  .text-6xl { font-size: 3.75rem; }
-  .text-7xl { font-size: 4.5rem; }
-  .text-8xl { font-size: 6rem; }
+  .text-detail { font-size: 0.75rem; }
+  .text-caption { font-size: 0.875rem; }
+  .text-body { font-size: 1rem; }
+  .text-subtitle { font-size: 1.125rem; }
+  .text-icon { font-size: 1.25rem; }
+  .text-heading { font-size: 1.5rem; }
+  .text-title { font-size: 1.875rem; }
+  .text-hero { font-size: 2.25rem; }
+  .text-display { font-size: 3rem; }
+  .text-emoji-large { font-size: 3.75rem; }
+  .text-emoji-huge { font-size: 4.5rem; }
+  .text-logo { font-size: 6rem; }
 }
 
 /* Classes de superfície */
@@ -236,6 +236,17 @@ body {
   color: var(--color-indigo-text);
 }
 
+/* Classes de feedback com texto normal */
+.bg-green-feedback {
+  background-color: var(--color-green-bg);
+  color: var(--color-on-surface);
+}
+
+.bg-red-feedback {
+  background-color: var(--color-red-bg);
+  color: var(--color-on-surface);
+}
+
 /* Classes de texto por contexto */
 .text-blue-context { color: var(--color-blue-text); }
 .text-green-context { color: var(--color-green-text); }
@@ -280,23 +291,9 @@ body {
   color: var(--color-text-secondary);
 }
 
-/* Classes de grays usando variáveis */
-.bg-gray-custom-50 { background-color: var(--color-gray-50); }
-.bg-gray-custom-100 { background-color: var(--color-gray-100); }
-.bg-gray-custom-200 { background-color: var(--color-gray-200); }
-.bg-gray-custom-300 { background-color: var(--color-gray-300); }
-.bg-gray-custom-700 { background-color: var(--color-gray-700); }
-.bg-gray-custom-800 { background-color: var(--color-gray-800); }
-
-.text-gray-custom-300 { color: var(--color-gray-300); }
-.text-gray-custom-400 { color: var(--color-gray-400); }
-.text-gray-custom-500 { color: var(--color-gray-500); }
-.text-gray-custom-600 { color: var(--color-gray-600); }
-
-.border-gray-custom-200 { border-color: var(--color-gray-200); }
-.border-gray-custom-300 { border-color: var(--color-gray-300); }
-.border-gray-custom-600 { border-color: var(--color-gray-600); }
-.border-gray-custom-700 { border-color: var(--color-gray-700); }
+/* Classes utilitárias específicas */
+.bg-progress-track { background-color: var(--color-gray-200); }
+.bg-card-subtle { background-color: var(--color-gray-100); }
 
 /* Botões customizados */
 .btn-primary {

@@ -10,7 +10,7 @@ import { QuizService } from '../services/quiz.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="min-h-screen bg-app-gradient flex items-center justify-center p-4 md:p-6">
-      <div class="max-w-2xl mx-auto">
+      <div class="max-w-4xl mx-auto">
         <div class="surface rounded-2xl shadow-2xl p-8 md:p-12 text-center">
           <!-- Header com emoji animado -->
           <div class="mb-8">
@@ -37,7 +37,7 @@ import { QuizService } from '../services/quiz.service';
 
           <!-- Barra de progresso decorativa -->
           <div class="mb-8">
-            <div class="w-full bg-gray-custom-200 rounded-full h-6 mb-6 overflow-hidden shadow-inner">
+            <div class="w-full bg-progress-track rounded-full h-6 mb-6 overflow-hidden shadow-inner">
               <div 
                 class="h-full rounded-full transition-all duration-2000 ease-out flex items-center justify-end pr-2"
                 [class]="getProgressBarClass()"
@@ -93,7 +93,7 @@ import { QuizService } from '../services/quiz.service';
           <!-- Sharing section -->
           <div class="mt-8 pt-6 border-t border-custom">
             <p class="text-sm text-muted mb-4">Compartilhe seu resultado:</p>
-            <div class="inline-block px-4 py-2 bg-gray-custom-100 rounded-lg text-sm text-muted">
+            <div class="inline-block px-4 py-2 bg-card-subtle rounded-lg text-sm text-muted">
               🧩 Consegui {{ resultado.porcentagem }}% no Quiz da Família!
             </div>
           </div>

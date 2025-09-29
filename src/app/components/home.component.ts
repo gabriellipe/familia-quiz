@@ -7,7 +7,7 @@ import { QuizService } from '../services/quiz.service';
   standalone: true,
   template: `
     <div class="min-h-screen bg-app-gradient flex items-center justify-center p-4 md:p-6">
-      <div class="max-w-4xl mx-auto">
+      <div class="max-w-6xl mx-auto">
         <div class="grid md:grid-cols-2 gap-8 items-center">
           <!-- Coluna esquerda - Logo e intro -->
           <div class="text-center md:text-left">

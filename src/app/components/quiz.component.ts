@@ -21,7 +21,7 @@ import { EstadoResposta } from '../types/quiz.types';
           <div class="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto"></div>
         </div>
       } @else {
-        <div class="max-w-3xl mx-auto">
+        <div class="max-w-5xl mx-auto">
           <!-- Header com progresso -->
           <div class="surface rounded-xl shadow-lg p-6 mb-6">
             <div class="flex justify-between items-center mb-4">
@@ -41,7 +41,7 @@ import { EstadoResposta } from '../types/quiz.types';
             </div>
             
             <!-- Barra de progresso melhorada -->
-            <div class="w-full bg-gray-custom-200 rounded-full h-3 overflow-hidden">
+            <div class="w-full bg-progress-track rounded-full h-3 overflow-hidden">
               <div 
                 class="h-full bg-gradient-to-r from-primary to-blue-600 rounded-full transition-all duration-500 ease-out"
                 [style.width]="getProgressWidth() + '%'"
@@ -69,7 +69,7 @@ import { EstadoResposta } from '../types/quiz.types';
                     (click)="responder($index)"
                     [disabled]="estadoResposta !== estadoRespostaNaoRespondida"
                     [class]="getButtonClass($index)"
-                    class="w-full p-5 rounded-xl text-left transition-all duration-300 border-2 hover:scale-102 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    class="w-full p-5 rounded-xl text-left transition-all duration-300 border-2 hover:scale-102 hover:shadow-md hover:border-focus focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   >
                     <div class="flex items-start gap-3">
                       <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center flex-shrink-0 mt-1">
@@ -89,9 +89,9 @@ import { EstadoResposta } from '../types/quiz.types';
                     <div class="w-10 h-10 rounded-full flex items-center justify-center text-xl">
                       {{ estadoResposta === estadoRespostaCorreta ? '✅' : '❌' }}
                     </div>
-                    <div>
-                      <div class="font-bold text-lg">{{ mensagemMotivacional }}</div>
-                      <div class="text-sm opacity-75">
+                    <div class="text-current">
+                      <div class="font-bold text-lg text-current">{{ mensagemMotivacional }}</div>
+                      <div class="text-sm opacity-75 text-current">
                         {{ estadoResposta === estadoRespostaCorreta ? 'Resposta correta!' : 'Resposta incorreta' }}
                       </div>
                     </div>
@@ -192,14 +192,12 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   protected getButtonClass(index: number): string {
-    const baseHover = 'hover:border-focus focus:border-focus';
-
     if (this.estadoResposta === EstadoResposta.NAO_RESPONDIDA) {
-      return `${baseHover} border-custom surface hover:bg-blue-context text-current`;
+      return 'border-custom surface text-current';
     }
 
     const pergunta = this.perguntaAtual;
-    if (!pergunta) return baseHover;
+    if (!pergunta) return 'border-custom surface text-current';
 
     // Após resposta selecionada:
     const isSelected = index === this.alternativaSelecionada;
@@ -208,9 +206,9 @@ export class QuizComponent implements OnInit, OnDestroy {
     if (isSelected) {
       // Alternativa selecionada: sempre borda azul
       if (isCorrect) {
-        return 'border-focus border-2 bg-green-context';
+        return 'border-focus bg-green-context';
       } else {
-        return 'border-focus border-2 bg-red-context';
+        return 'border-focus bg-red-context';
       }
     } else if (isCorrect) {
       // Alternativa correta (não selecionada): verde sem borda
@@ -223,8 +221,8 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   protected getFeedbackClass(): string {
     return this.estadoResposta === EstadoResposta.CORRETA
-      ? 'bg-green-context border-green-context'
-      : 'bg-red-context border-red-context';
+      ? 'bg-green-feedback border-green-context'
+      : 'bg-red-feedback border-red-context';
   }
 
   protected isSelected(index: number): boolean {

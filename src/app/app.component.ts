@@ -12,7 +12,7 @@ import { ThemeService } from './services/theme.service';
   template: `
     <div class="min-h-screen surface">
       <header class="p-4 border-b border-custom">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
           <h1 class="text-2xl font-bold">Quiz da Família</h1>
           <button 
             (click)="toggleTheme()"
@@ -24,7 +24,7 @@ import { ThemeService } from './services/theme.service';
         </div>
       </header>
 
-      <main class="max-w-4xl mx-auto">
+      <main class="max-w-6xl mx-auto">
         <router-outlet />
       </main>
     </div>
