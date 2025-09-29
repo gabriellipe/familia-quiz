@@ -17,6 +17,7 @@ export class QuizService {
   private acertosSource = new BehaviorSubject<number>(0);
   private estadoRespostaSource = new BehaviorSubject<EstadoResposta>(EstadoResposta.NAO_RESPONDIDA);
   private justificativaSource = new BehaviorSubject<string>('');
+  private respostaSelecionadaSource = new BehaviorSubject<number | undefined>(undefined);
 
   readonly perguntas$ = this.perguntasSource.asObservable();
   readonly perguntaAtualIndex$ = this.perguntaAtualIndexSource.asObservable();
