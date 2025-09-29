@@ -6,12 +6,12 @@ import { QuizService } from '../services/quiz.service';
   selector: 'app-home',
   standalone: true,
   template: `
-    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4 md:p-6">
+    <div class="min-h-screen bg-app-gradient flex items-center justify-center p-4 md:p-6">
       <div class="max-w-4xl mx-auto">
         <div class="grid md:grid-cols-2 gap-8 items-center">
           <!-- Coluna esquerda - Logo e intro -->
           <div class="text-center md:text-left">
-            <div class="inline-block p-6 bg-white/10 dark:bg-black/10 rounded-3xl mb-6">
+            <div class="inline-block p-6 surface-hover rounded-3xl mb-6">
               <div class="text-8xl">🧩</div>
             </div>
             <h1 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
@@ -21,13 +21,13 @@ import { QuizService } from '../services/quiz.service';
               Tecnologia e Educação em Família
             </p>
             <div class="flex flex-wrap gap-2 justify-center md:justify-start">
-              <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">
+              <span class="px-3 py-1 bg-blue-context rounded-full text-sm font-medium">
                 🎯 Educativo
               </span>
-              <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
+              <span class="px-3 py-1 bg-green-context rounded-full text-sm font-medium">
                 👨‍👩‍👧‍👦 Família
               </span>
-              <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm font-medium">
+              <span class="px-3 py-1 bg-purple-context rounded-full text-sm font-medium">
                 📱 Tecnologia
               </span>
             </div>
@@ -44,44 +44,44 @@ import { QuizService } from '../services/quiz.service';
                 Como funciona?
               </h2>
               <div class="grid gap-4">
-                <div class="flex items-start gap-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
-                  <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                <div class="flex items-start gap-4 p-4 bg-blue-context rounded-xl">
+                  <div class="w-8 h-8 accent-blue bg-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                     10
                   </div>
                   <div>
-                    <div class="font-semibold text-blue-800 dark:text-blue-200">Perguntas inteligentes</div>
-                    <div class="text-sm text-blue-600 dark:text-blue-400">Sobre uso consciente de tecnologia</div>
+                    <div class="font-semibold">Perguntas inteligentes</div>
+                    <div class="text-sm opacity-75">Sobre uso consciente de tecnologia</div>
                   </div>
                 </div>
                 
-                <div class="flex items-start gap-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-xl">
-                  <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                <div class="flex items-start gap-4 p-4 bg-green-context rounded-xl">
+                  <div class="w-8 h-8 accent-green bg-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                     4
                   </div>
                   <div>
-                    <div class="font-semibold text-green-800 dark:text-green-200">Alternativas cada</div>
-                    <div class="text-sm text-green-600 dark:text-green-400">Com explicações educativas</div>
+                    <div class="font-semibold">Alternativas cada</div>
+                    <div class="text-sm opacity-75">Com explicações educativas</div>
                   </div>
                 </div>
                 
-                <div class="flex items-start gap-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
-                  <div class="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center text-sm flex-shrink-0">
+                <div class="flex items-start gap-4 p-4 bg-purple-context rounded-xl">
+                  <div class="w-8 h-8 accent-purple bg-white rounded-full flex items-center justify-center text-sm flex-shrink-0">
                     ⚡
                   </div>
                   <div>
-                    <div class="font-semibold text-purple-800 dark:text-purple-200">Feedback imediato</div>
-                    <div class="text-sm text-purple-600 dark:text-purple-400">Aprenda com cada resposta</div>
+                    <div class="font-semibold">Feedback imediato</div>
+                    <div class="text-sm opacity-75">Aprenda com cada resposta</div>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Objetivo -->
-            <div class="mb-8 p-6 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 rounded-xl border border-indigo-200 dark:border-indigo-700">
-              <h3 class="text-lg font-semibold mb-3 text-indigo-800 dark:text-indigo-200 flex items-center gap-2">
+            <div class="mb-8 p-6 bg-indigo-context rounded-xl border border-indigo-context">
+              <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
                 <span class="text-xl">💡</span> Objetivo
               </h3>
-              <p class="text-indigo-700 dark:text-indigo-300 text-sm leading-relaxed">
+              <p class="text-sm leading-relaxed opacity-90">
                 Fortalecer a parceria entre família e escola no uso equilibrado da tecnologia, 
                 promovendo reflexões sobre hábitos digitais saudáveis e educação consciente.
               </p>
@@ -100,11 +100,11 @@ import { QuizService } from '../services/quiz.service';
             <!-- Informações extras -->
             <div class="mt-6 flex justify-between text-sm text-muted">
               <span class="flex items-center gap-2">
-                <span class="text-blue-500">⏱️</span>
+                <span class="accent-blue">⏱️</span>
                 5-10 minutos
               </span>
               <span class="flex items-center gap-2">
-                <span class="text-green-500">👥</span>
+                <span class="accent-green">👥</span>
                 Todas as idades
               </span>
             </div>

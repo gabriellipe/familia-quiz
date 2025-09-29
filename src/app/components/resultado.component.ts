@@ -9,12 +9,12 @@ import { QuizService } from '../services/quiz.service';
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800 flex items-center justify-center p-4 md:p-6">
+    <div class="min-h-screen bg-app-gradient flex items-center justify-center p-4 md:p-6">
       <div class="max-w-2xl mx-auto">
         <div class="surface rounded-2xl shadow-2xl p-8 md:p-12 text-center">
           <!-- Header com emoji animado -->
           <div class="mb-8">
-            <div class="inline-block p-6 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-full mb-6 animate-bounce">
+            <div class="inline-block p-6 bg-blue-context rounded-full mb-6 animate-bounce">
               <div class="text-7xl">{{ getEmoji() }}</div>
             </div>
             <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
@@ -37,7 +37,7 @@ import { QuizService } from '../services/quiz.service';
 
           <!-- Barra de progresso decorativa -->
           <div class="mb-8">
-            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-6 mb-6 overflow-hidden shadow-inner">
+            <div class="w-full bg-gray-custom-200 rounded-full h-6 mb-6 overflow-hidden shadow-inner">
               <div 
                 class="h-full rounded-full transition-all duration-2000 ease-out flex items-center justify-end pr-2"
                 [class]="getProgressBarClass()"
@@ -62,11 +62,11 @@ import { QuizService } from '../services/quiz.service';
               <div class="text-xs text-muted">Perguntas</div>
             </div>
             <div class="surface-variant rounded-xl p-4">
-              <div class="text-2xl font-bold text-green-600">{{ resultado.acertos }}</div>
+              <div class="text-2xl font-bold accent-green">{{ resultado.acertos }}</div>
               <div class="text-xs text-muted">Acertos</div>
             </div>
             <div class="surface-variant rounded-xl p-4">
-              <div class="text-2xl font-bold text-red-500">{{ resultado.total - resultado.acertos }}</div>
+              <div class="text-2xl font-bold accent-red">{{ resultado.total - resultado.acertos }}</div>
               <div class="text-xs text-muted">Erros</div>
             </div>
           </div>
@@ -83,7 +83,7 @@ import { QuizService } from '../services/quiz.service';
 
             <button
               (click)="voltarInicio()"
-              class="w-full py-4 px-8 text-lg font-medium rounded-xl border-2 border-gray-300 dark:border-gray-600 surface hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 flex items-center justify-center gap-3"
+              class="w-full py-4 px-8 text-lg font-medium rounded-xl border-2 border-custom surface surface-hover transition-all duration-300 flex items-center justify-center gap-3"
             >
               <span class="text-xl">🏠</span>
               Voltar ao Início
@@ -91,9 +91,9 @@ import { QuizService } from '../services/quiz.service';
           </div>
 
           <!-- Sharing section -->
-          <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+          <div class="mt-8 pt-6 border-t border-custom">
             <p class="text-sm text-muted mb-4">Compartilhe seu resultado:</p>
-            <div class="inline-block px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm text-muted">
+            <div class="inline-block px-4 py-2 bg-gray-custom-100 rounded-lg text-sm text-muted">
               🧩 Consegui {{ resultado.porcentagem }}% no Quiz da Família!
             </div>
           </div>
@@ -126,16 +126,16 @@ export class ResultadoComponent {
 
   protected getMessageClass(): string {
     const porcentagem = this.resultado.porcentagem;
-    if (porcentagem >= 80) return 'text-green-700 dark:text-green-300';
-    if (porcentagem >= 50) return 'text-yellow-700 dark:text-yellow-300';
-    return 'text-red-700 dark:text-red-300';
+    if (porcentagem >= 80) return 'text-green-context';
+    if (porcentagem >= 50) return 'text-yellow-context';
+    return 'text-red-context';
   }
 
   protected getMessageContainerClass(): string {
     const porcentagem = this.resultado.porcentagem;
-    if (porcentagem >= 80) return 'border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/20';
-    if (porcentagem >= 50) return 'border-yellow-200 dark:border-yellow-700 bg-yellow-50 dark:bg-yellow-900/20';
-    return 'border-red-200 dark:border-red-700 bg-red-50 dark:bg-red-900/20';
+    if (porcentagem >= 80) return 'border-green-context bg-green-context';
+    if (porcentagem >= 50) return 'border-yellow-context bg-yellow-context';
+    return 'border-red-context bg-red-context';
   }
 
   protected getPerformanceMessage(): string {

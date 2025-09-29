@@ -10,13 +10,13 @@ import { ThemeService } from './services/theme.service';
   imports: [RouterOutlet, CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="min-h-screen bg-surface text-on-surface">
-      <header class="p-4 border-b border-gray-200 dark:border-gray-700">
+    <div class="min-h-screen surface">
+      <header class="p-4 border-b border-custom">
         <div class="max-w-4xl mx-auto flex justify-between items-center">
           <h1 class="text-2xl font-bold">Quiz da Família</h1>
           <button 
             (click)="toggleTheme()"
-            class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            class="p-2 rounded-lg surface-hover transition-colors"
             aria-label="Alternar tema"
           >
             <span class="text-xl">{{ (themeService.isDark$ | async) ? '☀️' : '🌙' }}</span>

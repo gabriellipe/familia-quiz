@@ -1,41 +1,137 @@
 @unocss;
 
-/* CSS Variables para tema light/dark - CORRIGIDO */
+/* CSS Variables para tema light/dark - SISTEMA COMPLETO */
 :root,
 :root.light {
-  /* Tema Light (padrão) */
+  /* Cores primárias */
   --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
   --color-on-primary: #ffffff;
+  
+  /* Superfícies */
   --color-surface: #ffffff;
   --color-on-surface: #1f2937;
   --color-surface-variant: #f8fafc;
+  --color-surface-hover: #f1f5f9;
+  
+  /* Bordas e separadores */
   --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+  --color-border-focus: var(--color-primary);
+  
+  /* Textos */
   --color-muted: #6b7280;
-  --color-success: #dcfce7;
+  --color-text-secondary: #4b5563;
+  
+  /* Estados de feedback */
+  --color-success-bg: #dcfce7;
   --color-success-border: #22c55e;
   --color-success-text: #15803d;
-  --color-error: #fef2f2;
+  --color-error-bg: #fef2f2;
   --color-error-border: #ef4444;
   --color-error-text: #b91c1c;
+  
+  /* Backgrounds específicos */
+  --color-bg-gradient-start: #dbeafe;
+  --color-bg-gradient-end: #e0e7ff;
   --color-progress-bg: #e5e7eb;
+  
+  /* Cores específicas por contexto */
+  --color-blue-bg: #dbeafe;
+  --color-blue-text: #1e40af;
+  --color-blue-accent: #3b82f6;
+  --color-green-bg: #dcfce7;
+  --color-green-text: #15803d;
+  --color-green-accent: #22c55e;
+  --color-purple-bg: #f3e8ff;
+  --color-purple-text: #7c3aed;
+  --color-purple-accent: #8b5cf6;
+  --color-red-bg: #fef2f2;
+  --color-red-text: #dc2626;
+  --color-red-accent: #ef4444;
+  --color-yellow-bg: #fefce8;
+  --color-yellow-text: #ca8a04;
+  --color-yellow-accent: #eab308;
+  --color-indigo-bg: #eef2ff;
+  --color-indigo-text: #4338ca;
+  --color-indigo-accent: #6366f1;
+  
+  /* Grays */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
 }
 
 :root.dark {
-  /* Tema Dark */
+  /* Cores primárias */
   --color-primary: #60a5fa;
+  --color-primary-hover: #3b82f6;
   --color-on-primary: #1e293b;
+  
+  /* Superfícies */
   --color-surface: #1e293b;
   --color-on-surface: #f1f5f9;
   --color-surface-variant: #334155;
+  --color-surface-hover: #475569;
+  
+  /* Bordas e separadores */
   --color-border: #475569;
+  --color-border-light: #334155;
+  --color-border-focus: var(--color-primary);
+  
+  /* Textos */
   --color-muted: #94a3b8;
-  --color-success: rgba(21, 128, 61, 0.2);
+  --color-text-secondary: #cbd5e1;
+  
+  /* Estados de feedback */
+  --color-success-bg: rgba(21, 128, 61, 0.2);
   --color-success-border: #22c55e;
   --color-success-text: #86efac;
-  --color-error: rgba(185, 28, 28, 0.2);
+  --color-error-bg: rgba(185, 28, 28, 0.2);
   --color-error-border: #ef4444;
   --color-error-text: #fca5a5;
+  
+  /* Backgrounds específicos */
+  --color-bg-gradient-start: #0f172a;
+  --color-bg-gradient-end: #1e293b;
   --color-progress-bg: #374151;
+  
+  /* Cores específicas por contexto */
+  --color-blue-bg: rgba(59, 130, 246, 0.2);
+  --color-blue-text: #93c5fd;
+  --color-blue-accent: #60a5fa;
+  --color-green-bg: rgba(34, 197, 94, 0.2);
+  --color-green-text: #86efac;
+  --color-green-accent: #4ade80;
+  --color-purple-bg: rgba(139, 92, 246, 0.2);
+  --color-purple-text: #c4b5fd;
+  --color-purple-accent: #a78bfa;
+  --color-red-bg: rgba(239, 68, 68, 0.2);
+  --color-red-text: #fca5a5;
+  --color-red-accent: #f87171;
+  --color-yellow-bg: rgba(234, 179, 8, 0.2);
+  --color-yellow-text: #fde047;
+  --color-yellow-accent: #facc15;
+  --color-indigo-bg: rgba(99, 102, 241, 0.2);
+  --color-indigo-text: #a5b4fc;
+  --color-indigo-accent: #818cf8;
+  
+  /* Grays */
+  --color-gray-50: #1e293b;
+  --color-gray-100: #334155;
+  --color-gray-200: #475569;
+  --color-gray-300: #64748b;
+  --color-gray-400: #94a3b8;
+  --color-gray-500: #cbd5e1;
+  --color-gray-600: #e2e8f0;
+  --color-gray-700: #f1f5f9;
+  --color-gray-800: #f8fafc;
 }
 
 /* Reset básico */
@@ -51,9 +147,45 @@ body {
   color: var(--color-on-surface);
   transition: background-color 0.3s, color 0.3s;
   min-height: 100vh;
+  font-size: 16px; /* Base font size for desktop */
 }
 
-/* Classes customizadas para melhor integração com UnoCSS */
+/* Typography System - Mobile First */
+@media (max-width: 767px) {
+  html { font-size: 18px; } /* Increase base size for mobile */
+  
+  .text-xs { font-size: 0.8rem; }
+  .text-sm { font-size: 0.9rem; }
+  .text-base { font-size: 1rem; }
+  .text-lg { font-size: 1.15rem; }
+  .text-xl { font-size: 1.3rem; }
+  .text-2xl { font-size: 1.6rem; }
+  .text-3xl { font-size: 2rem; }
+  .text-4xl { font-size: 2.5rem; }
+  .text-5xl { font-size: 3rem; }
+  .text-6xl { font-size: 3.5rem; }
+  .text-7xl { font-size: 4rem; }
+  .text-8xl { font-size: 4.5rem; }
+}
+
+@media (min-width: 768px) {
+  html { font-size: 16px; } /* Standard size for desktop */
+  
+  .text-xs { font-size: 0.75rem; }
+  .text-sm { font-size: 0.875rem; }
+  .text-base { font-size: 1rem; }
+  .text-lg { font-size: 1.125rem; }
+  .text-xl { font-size: 1.25rem; }
+  .text-2xl { font-size: 1.5rem; }
+  .text-3xl { font-size: 1.875rem; }
+  .text-4xl { font-size: 2.25rem; }
+  .text-5xl { font-size: 3rem; }
+  .text-6xl { font-size: 3.75rem; }
+  .text-7xl { font-size: 4.5rem; }
+  .text-8xl { font-size: 6rem; }
+}
+
+/* Classes de superfície */
 .surface {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
@@ -64,13 +196,107 @@ body {
   color: var(--color-on-surface);
 }
 
+.surface-hover {
+  background-color: var(--color-surface-hover);
+}
+
+/* Classes de background gradiente */
+.bg-app-gradient {
+  background: linear-gradient(to bottom right, var(--color-bg-gradient-start), var(--color-bg-gradient-end));
+}
+
+/* Classes de background por contexto */
+.bg-blue-context {
+  background-color: var(--color-blue-bg);
+  color: var(--color-blue-text);
+}
+
+.bg-green-context {
+  background-color: var(--color-green-bg);
+  color: var(--color-green-text);
+}
+
+.bg-purple-context {
+  background-color: var(--color-purple-bg);
+  color: var(--color-purple-text);
+}
+
+.bg-red-context {
+  background-color: var(--color-red-bg);
+  color: var(--color-red-text);
+}
+
+.bg-yellow-context {
+  background-color: var(--color-yellow-bg);
+  color: var(--color-yellow-text);
+}
+
+.bg-indigo-context {
+  background-color: var(--color-indigo-bg);
+  color: var(--color-indigo-text);
+}
+
+/* Classes de texto por contexto */
+.text-blue-context { color: var(--color-blue-text); }
+.text-green-context { color: var(--color-green-text); }
+.text-purple-context { color: var(--color-purple-text); }
+.text-red-context { color: var(--color-red-text); }
+.text-yellow-context { color: var(--color-yellow-text); }
+.text-indigo-context { color: var(--color-indigo-text); }
+
+/* Classes de accent por contexto */
+.accent-blue { color: var(--color-blue-accent); }
+.accent-green { color: var(--color-green-accent); }
+.accent-purple { color: var(--color-purple-accent); }
+.accent-red { color: var(--color-red-accent); }
+.accent-yellow { color: var(--color-yellow-accent); }
+.accent-indigo { color: var(--color-indigo-accent); }
+
+/* Classes de bordas */
 .border-custom {
   border-color: var(--color-border);
 }
 
+.border-light {
+  border-color: var(--color-border-light);
+}
+
+.border-focus {
+  border-color: var(--color-border-focus);
+}
+
+.border-blue-context { border-color: var(--color-blue-accent); }
+.border-green-context { border-color: var(--color-green-accent); }
+.border-red-context { border-color: var(--color-red-accent); }
+.border-yellow-context { border-color: var(--color-yellow-accent); }
+.border-indigo-context { border-color: var(--color-indigo-accent); }
+
+/* Classes de texto */
 .text-muted {
   color: var(--color-muted);
 }
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+/* Classes de grays usando variáveis */
+.bg-gray-custom-50 { background-color: var(--color-gray-50); }
+.bg-gray-custom-100 { background-color: var(--color-gray-100); }
+.bg-gray-custom-200 { background-color: var(--color-gray-200); }
+.bg-gray-custom-300 { background-color: var(--color-gray-300); }
+.bg-gray-custom-700 { background-color: var(--color-gray-700); }
+.bg-gray-custom-800 { background-color: var(--color-gray-800); }
+
+.text-gray-custom-300 { color: var(--color-gray-300); }
+.text-gray-custom-400 { color: var(--color-gray-400); }
+.text-gray-custom-500 { color: var(--color-gray-500); }
+.text-gray-custom-600 { color: var(--color-gray-600); }
+
+.border-gray-custom-200 { border-color: var(--color-gray-200); }
+.border-gray-custom-300 { border-color: var(--color-gray-300); }
+.border-gray-custom-600 { border-color: var(--color-gray-600); }
+.border-gray-custom-700 { border-color: var(--color-gray-700); }
 
 /* Botões customizados */
 .btn-primary {

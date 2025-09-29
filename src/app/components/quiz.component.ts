@@ -12,7 +12,7 @@ import { EstadoResposta } from '../types/quiz.types';
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-900 dark:to-slate-800 p-4 md:p-6">
+    <div class="min-h-screen bg-app-gradient p-4 md:p-6">
       @if (quizService.quizFinalizado) {
         <div class="max-w-md mx-auto surface rounded-xl shadow-lg p-8 text-center">
           <div class="text-6xl mb-4">🎯</div>
@@ -41,7 +41,7 @@ import { EstadoResposta } from '../types/quiz.types';
             </div>
             
             <!-- Barra de progresso melhorada -->
-            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+            <div class="w-full bg-gray-custom-200 rounded-full h-3 overflow-hidden">
               <div 
                 class="h-full bg-gradient-to-r from-primary to-blue-600 rounded-full transition-all duration-500 ease-out"
                 [style.width]="getProgressWidth() + '%'"
@@ -56,8 +56,8 @@ import { EstadoResposta } from '../types/quiz.types';
           @if (perguntaAtual) {
             <div class="surface rounded-xl shadow-lg p-6 md:p-8">
               <div class="flex items-start gap-4 mb-8">
-                <div class="w-8 h-8 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span class="text-indigo-600 dark:text-indigo-400 font-bold">?</span>
+                <div class="w-8 h-8 bg-indigo-context rounded-full flex items-center justify-center flex-shrink-0">
+                  <span class="text-indigo-context font-bold">?</span>
                 </div>
                 <h2 class="text-xl md:text-2xl font-semibold leading-relaxed">{{ perguntaAtual.pergunta }}</h2>
               </div>
@@ -98,7 +98,7 @@ import { EstadoResposta } from '../types/quiz.types';
                   </div>
                   
                   @if (justificativa) {
-                    <div class="bg-white/10 dark:bg-black/10 rounded-lg p-4 mb-4">
+                    <div class="surface-hover rounded-lg p-4 mb-4">
                       <p class="text-sm leading-relaxed">{{ justificativa }}</p>
                     </div>
                   }
@@ -192,10 +192,10 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   protected getButtonClass(index: number): string {
-    const baseHover = 'hover:border-primary/50 focus:border-primary';
+    const baseHover = 'hover:border-focus focus:border-focus';
 
     if (this.estadoResposta === EstadoResposta.NAO_RESPONDIDA) {
-      return `${baseHover} border-gray-300 dark:border-gray-600 surface hover:bg-blue-50 dark:hover:bg-blue-900/20 text-current`;
+      return `${baseHover} border-custom surface hover:bg-blue-context text-current`;
     }
 
     const pergunta = this.perguntaAtual;
@@ -208,23 +208,23 @@ export class QuizComponent implements OnInit, OnDestroy {
     if (isSelected) {
       // Alternativa selecionada: sempre borda azul
       if (isCorrect) {
-        return 'border-primary border-2 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300';
+        return 'border-focus border-2 bg-green-context';
       } else {
-        return 'border-primary border-2 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300';
+        return 'border-focus border-2 bg-red-context';
       }
     } else if (isCorrect) {
       // Alternativa correta (não selecionada): verde sem borda
-      return 'border-transparent bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300';
+      return 'border-transparent bg-green-context';
     } else {
       // Alternativas erradas (não selecionadas): vermelhas sem borda
-      return 'border-transparent bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 opacity-75';
+      return 'border-transparent bg-red-context opacity-75';
     }
   }
 
   protected getFeedbackClass(): string {
     return this.estadoResposta === EstadoResposta.CORRETA
-      ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700 text-green-800 dark:text-green-200'
-      : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700 text-red-800 dark:text-red-200';
+      ? 'bg-green-context border-green-context'
+      : 'bg-red-context border-red-context';
   }
 
   protected isSelected(index: number): boolean {
